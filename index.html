@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumi Learn — Fun Early Learning for Kids Ages 2–6</title>
+<meta name="description" content="Help your child learn ABCs, numbers, colors, animals, spelling and more — with games, sounds, and rewards they'll love. 7-day free trial, then $8.99/month.">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#ff6b35;--yellow:#ffd32a;--green:#2ed573;--blue:#1e90ff;
+  --purple:#a55eea;--pink:#ff6b9d;--red:#ff4757;
+  --dark:#1a1a2e;--darker:#0f0f1a;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;background:#fff9f0;overflow-x:hidden;}
+
+/* ── FLOATING ELEMENTS ── */
+.float{position:absolute;font-size:32px;opacity:0.12;animation:floatAnim 6s ease-in-out infinite;pointer-events:none;user-select:none;}
+@keyframes floatAnim{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-18px) rotate(8deg)}}
+
+/* ── NAVBAR ── */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 32px;
+  background:rgba(255,249,240,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:3px solid rgba(255,107,53,0.1);
+  transition:all 0.3s;
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-icon{font-size:28px;animation:spin 8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.nav-logo-text{font-family:'Fredoka One',cursive;font-size:24px;color:var(--orange);}
+.nav-actions{display:flex;align-items:center;gap:12px;}
+.nav-link{font-weight:800;font-size:14px;color:#666;cursor:pointer;transition:color 0.2s;background:none;border:none;}
+.nav-link:hover{color:var(--orange);}
+.nav-cta{background:var(--orange);color:white;border:none;border-radius:12px;padding:10px 22px;font-family:'Fredoka One',cursive;font-size:15px;cursor:pointer;box-shadow:0 4px 0 #cc3300;transition:all 0.15s;}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 0 #cc3300;}
+.nav-cta:active{transform:translateY(1px);box-shadow:0 2px 0 #cc3300;}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  background:linear-gradient(160deg,#fff9f0 0%,#fff0e0 50%,#ffe8d5 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:100px 24px 60px;
+  position:relative;overflow:hidden;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,107,53,0.12);border:2px solid rgba(255,107,53,0.2);
+  border-radius:20px;padding:6px 16px;
+  font-size:13px;font-weight:800;color:var(--orange);
+  margin-bottom:24px;letter-spacing:0.5px;
+  animation:fadeUp 0.6s ease both;
+}
+.hero h1{
+  font-family:'Fredoka One',cursive;
+  font-size:clamp(44px,8vw,80px);
+  line-height:1.1;color:var(--dark);
+  margin-bottom:20px;
+  animation:fadeUp 0.6s ease 0.1s both;
+}
+.hero h1 span{color:var(--orange);}
+.hero-sub{
+  font-size:clamp(16px,2.5vw,22px);font-weight:700;color:#666;
+  max-width:560px;line-height:1.6;margin-bottom:36px;
+  animation:fadeUp 0.6s ease 0.2s both;
+}
+.hero-cta-group{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp 0.6s ease 0.3s both;}
+.hero-cta{
+  background:var(--orange);color:white;border:none;
+  border-radius:16px;padding:18px 36px;
+  font-family:'Fredoka One',cursive;font-size:20px;
+  cursor:pointer;box-shadow:0 6px 0 #cc3300;
+  transition:all 0.15s;text-decoration:none;display:inline-block;
+}
+.hero-cta:hover{transform:translateY(-3px);box-shadow:0 9px 0 #cc3300;}
+.hero-cta:active{transform:translateY(2px);box-shadow:0 2px 0 #cc3300;}
+.hero-cta.secondary{background:white;color:var(--orange);border:3px solid var(--orange);box-shadow:0 6px 0 #ffe0cc;}
+.hero-cta.secondary:hover{box-shadow:0 9px 0 #ffe0cc;}
+
+.hero-trial{font-size:13px;font-weight:800;color:#aaa;margin-top:14px;animation:fadeUp 0.6s ease 0.4s both;}
+.hero-trial span{color:var(--green);}
+
+/* emoji orbit */
+.emoji-orbit{position:absolute;width:100%;height:100%;top:0;left:0;pointer-events:none;}
+.orbit-em{position:absolute;font-size:36px;animation:orbit 20s linear infinite;}
+
+/* ── SUBJECTS STRIP ── */
+.subjects-strip{
+  background:white;border-top:4px solid #ffe0cc;border-bottom:4px solid #ffe0cc;
+  padding:20px 0;overflow:hidden;
+}
+.subjects-track{
+  display:flex;gap:24px;width:max-content;
+  animation:scroll 20s linear infinite;
+}
+.subjects-track:hover{animation-play-state:paused;}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.subject-chip{
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+  background:var(--bg,#fff9f0);border:3px solid #ffe0cc;border-radius:20px;
+  padding:8px 18px;font-family:'Fredoka One',cursive;font-size:15px;color:#555;
+  white-space:nowrap;
+}
+.subject-chip span{font-size:22px;}
+
+/* ── FEATURES ── */
+.features{padding:80px 24px;background:#fff9f0;text-align:center;}
+.section-label{font-size:12px;font-weight:800;color:var(--orange);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;}
+.section-title{font-family:'Fredoka One',cursive;font-size:clamp(28px,5vw,46px);color:var(--dark);margin-bottom:12px;}
+.section-sub{font-size:17px;color:#888;font-weight:700;max-width:520px;margin:0 auto 52px;line-height:1.6;}
+
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;max-width:900px;margin:0 auto;}
+.feature-card{
+  background:white;border-radius:24px;padding:32px 24px;
+  border:4px solid #ffe8d5;text-align:left;
+  transition:transform 0.2s,box-shadow 0.2s;
+  position:relative;overflow:hidden;
+}
+.feature-card::before{content:'';position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle at top right,rgba(255,107,53,0.06),transparent 70%);}
+.feature-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(255,107,53,0.12);}
+.feature-icon{font-size:44px;margin-bottom:16px;display:block;}
+.feature-title{font-family:'Fredoka One',cursive;font-size:22px;color:var(--dark);margin-bottom:8px;}
+.feature-desc{font-size:14px;color:#888;font-weight:700;line-height:1.6;}
+
+/* ── SOCIAL PROOF ── */
+.social{background:linear-gradient(135deg,#fff5ee,#ffe8d5);padding:80px 24px;text-align:center;}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:860px;margin:0 auto;}
+.review-card{background:white;border-radius:20px;padding:24px;border:3px solid #ffe0cc;text-align:left;}
+.review-stars{font-size:18px;margin-bottom:12px;letter-spacing:2px;}
+.review-text{font-size:15px;color:#555;font-weight:700;line-height:1.65;margin-bottom:14px;font-style:italic;}
+.review-author{font-size:13px;font-weight:800;color:#888;}
+.review-author strong{color:var(--orange);}
+
+/* ── PRICING ── */
+.pricing{padding:80px 24px;background:#fff9f0;text-align:center;}
+.pricing-card{
+  background:white;border-radius:28px;padding:44px 40px;
+  border:5px solid var(--orange);max-width:420px;margin:0 auto;
+  box-shadow:0 20px 60px rgba(255,107,53,0.15);
+  position:relative;overflow:hidden;
+}
+.pricing-card::before{content:'MOST POPULAR ⭐';position:absolute;top:18px;right:-28px;background:var(--orange);color:white;font-family:'Fredoka One',cursive;font-size:11px;padding:5px 40px;transform:rotate(45deg);letter-spacing:1px;}
+.pricing-badge{background:rgba(46,213,115,0.12);border:2px solid rgba(46,213,115,0.3);border-radius:20px;padding:6px 16px;font-size:13px;font-weight:800;color:var(--green);display:inline-block;margin-bottom:20px;}
+.pricing-name{font-family:'Fredoka One',cursive;font-size:28px;color:var(--dark);margin-bottom:6px;}
+.pricing-price{font-family:'Fredoka One',cursive;font-size:56px;color:var(--orange);line-height:1;margin-bottom:4px;}
+.pricing-price sup{font-size:28px;vertical-align:top;margin-top:8px;}
+.pricing-price sub{font-size:20px;color:#aaa;}
+.pricing-trial{font-size:14px;font-weight:800;color:var(--green);margin-bottom:28px;}
+.pricing-features{list-style:none;text-align:left;margin-bottom:32px;}
+.pricing-features li{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:2px solid #fff5ee;font-size:15px;font-weight:700;color:#555;}
+.pricing-features li:last-child{border-bottom:none;}
+.pricing-features li::before{content:'✅';font-size:16px;flex-shrink:0;}
+.pricing-cta{width:100%;background:var(--orange);color:white;border:none;border-radius:16px;padding:18px;font-family:'Fredoka One',cursive;font-size:22px;cursor:pointer;box-shadow:0 6px 0 #cc3300;transition:all 0.15s;}
+.pricing-cta:hover{transform:translateY(-2px);box-shadow:0 8px 0 #cc3300;}
+.pricing-note{font-size:12px;color:#aaa;font-weight:700;margin-top:14px;}
+
+/* ── FAQ ── */
+.faq{padding:80px 24px;background:linear-gradient(135deg,#fff5ee,#ffe8d5);}
+.faq-list{max-width:680px;margin:0 auto;}
+.faq-item{background:white;border-radius:16px;margin-bottom:12px;border:3px solid #ffe0cc;overflow:hidden;}
+.faq-q{padding:18px 22px;font-family:'Fredoka One',cursive;font-size:18px;color:var(--dark);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background 0.15s;}
+.faq-q:hover{background:#fff5ee;}
+.faq-q .arrow{transition:transform 0.3s;font-size:14px;}
+.faq-a{padding:0 22px;max-height:0;overflow:hidden;transition:all 0.3s;font-size:15px;color:#666;font-weight:700;line-height:1.7;}
+.faq-item.open .faq-q{background:#fff5ee;}
+.faq-item.open .faq-a{padding:0 22px 18px;max-height:200px;}
+.faq-item.open .arrow{transform:rotate(180deg);}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);color:rgba(255,255,255,0.6);padding:40px 24px;text-align:center;}
+footer .footer-logo{font-family:'Fredoka One',cursive;font-size:24px;color:var(--orange);margin-bottom:12px;}
+footer p{font-size:13px;font-weight:700;line-height:1.8;}
+footer a{color:rgba(255,255,255,0.4);text-decoration:none;}
+footer a:hover{color:var(--orange);}
+
+/* ── MODALS ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;animation:fadeIn 0.25s ease;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{background:white;border-radius:28px;padding:36px 32px;width:100%;max-width:420px;position:relative;animation:slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.modal-close{position:absolute;top:16px;right:18px;background:none;border:none;font-size:22px;cursor:pointer;color:#aaa;transition:color 0.15s;}
+.modal-close:hover{color:var(--dark);}
+.modal-logo{text-align:center;margin-bottom:20px;}
+.modal-logo-icon{font-size:44px;}
+.modal-title{font-family:'Fredoka One',cursive;font-size:28px;color:var(--dark);text-align:center;margin-bottom:6px;}
+.modal-sub{font-size:14px;color:#888;font-weight:700;text-align:center;margin-bottom:24px;line-height:1.5;}
+.form-group{margin-bottom:16px;}
+.form-label{display:block;font-size:12px;font-weight:800;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+.form-input{width:100%;background:#fff9f0;border:3px solid #ffe0cc;border-radius:12px;padding:12px 16px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;color:var(--dark);outline:none;transition:border-color 0.2s;}
+.form-input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,107,53,0.1);}
+.form-submit{width:100%;background:var(--orange);color:white;border:none;border-radius:14px;padding:15px;font-family:'Fredoka One',cursive;font-size:20px;cursor:pointer;box-shadow:0 5px 0 #cc3300;transition:all 0.15s;margin-top:6px;}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 7px 0 #cc3300;}
+.form-submit:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:0 3px 0 #cc3300;}
+.form-error{background:#fde8eb;border:2px solid #ff4757;border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;color:#cc0022;margin-bottom:14px;display:none;}
+.form-switch{text-align:center;margin-top:16px;font-size:14px;font-weight:700;color:#888;}
+.form-switch a{color:var(--orange);cursor:pointer;text-decoration:none;font-weight:800;}
+.form-switch a:hover{text-decoration:underline;}
+.trial-note{background:rgba(46,213,115,0.1);border:2px solid rgba(46,213,115,0.3);border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;color:#1aaa55;margin-bottom:16px;text-align:center;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:all 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a class="nav-logo" href="/">
+    <span class="nav-logo-icon">🌟</span>
+    <span class="nav-logo-text">Lumi Learn</span>
+  </a>
+  <div class="nav-actions">
+    <button class="nav-link" onclick="openModal('login')">Log In</button>
+    <button class="nav-cta" onclick="openModal('signup')">Start Free Trial ✨</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- floating emojis -->
+  <div class="float" style="top:12%;left:5%;animation-delay:0s">🔤</div>
+  <div class="float" style="top:18%;right:7%;animation-delay:1s">🐶</div>
+  <div class="float" style="top:60%;left:3%;animation-delay:2s">⭐</div>
+  <div class="float" style="top:70%;right:5%;animation-delay:0.5s">🎨</div>
+  <div class="float" style="top:40%;left:8%;animation-delay:1.5s">🔢</div>
+  <div class="float" style="top:35%;right:10%;animation-delay:2.5s">🌈</div>
+
+  <div class="hero-badge">🌟 Trusted by 1,000+ Families</div>
+  <h1>Learning That Kids<br><span>Actually Love</span> 🎉</h1>
+  <p class="hero-sub">ABCs, numbers, colors, animals, spelling games, and more — all designed for little hands and big imaginations. Ages 2–6.</p>
+  <div class="hero-cta-group">
+    <button class="hero-cta" onclick="openModal('signup')">Start 7-Day Free Trial →</button>
+    <a class="hero-cta secondary" href="/app">Preview the App 👀</a>
+  </div>
+  <div class="hero-trial">
+    <span>✅ 7 days completely free</span> &nbsp;·&nbsp; No credit card tricks &nbsp;·&nbsp; Cancel anytime
+  </div>
+</section>
+
+<!-- SUBJECTS SCROLLING STRIP -->
+<div class="subjects-strip">
+  <div class="subjects-track">
+    <div class="subject-chip"><span>🔤</span> Alphabet</div>
+    <div class="subject-chip"><span>🔢</span> Numbers 1–20</div>
+    <div class="subject-chip"><span>🎨</span> Colors</div>
+    <div class="subject-chip"><span>🐾</span> Animal Sounds</div>
+    <div class="subject-chip"><span>🔷</span> Shapes</div>
+    <div class="subject-chip"><span>🧑</span> Body Parts</div>
+    <div class="subject-chip"><span>👁️</span> Sight Words</div>
+    <div class="subject-chip"><span>✍️</span> Spelling Games</div>
+    <div class="subject-chip"><span>🎮</span> Learning Games</div>
+    <div class="subject-chip"><span>🧩</span> Memory Puzzle</div>
+    <div class="subject-chip"><span>✏️</span> Art Studio</div>
+    <div class="subject-chip"><span>📊</span> Parent Tracker</div>
+    <!-- duplicate for infinite scroll -->
+    <div class="subject-chip"><span>🔤</span> Alphabet</div>
+    <div class="subject-chip"><span>🔢</span> Numbers 1–20</div>
+    <div class="subject-chip"><span>🎨</span> Colors</div>
+    <div class="subject-chip"><span>🐾</span> Animal Sounds</div>
+    <div class="subject-chip"><span>🔷</span> Shapes</div>
+    <div class="subject-chip"><span>🧑</span> Body Parts</div>
+    <div class="subject-chip"><span>👁️</span> Sight Words</div>
+    <div class="subject-chip"><span>✍️</span> Spelling Games</div>
+    <div class="subject-chip"><span>🎮</span> Learning Games</div>
+    <div class="subject-chip"><span>🧩</span> Memory Puzzle</div>
+    <div class="subject-chip"><span>✏️</span> Art Studio</div>
+    <div class="subject-chip"><span>📊</span> Parent Tracker</div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-label">Why Parents Choose Lumi Learn</div>
+  <div class="section-title">Everything a growing mind needs</div>
+  <div class="section-sub">Built from the ground up for ages 2–6. Every tap, sound, and game is designed to make learning feel like play.</div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <span class="feature-icon">🔊</span>
+      <div class="feature-title">Sound & Voice</div>
+      <div class="feature-desc">Every letter, number, animal and word is spoken aloud. Kids learn by hearing, not just seeing.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🎮</span>
+      <div class="feature-title">Games, Not Drills</div>
+      <div class="feature-desc">Letter match, counting games, color quiz, memory puzzle — learning disguised as pure fun.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">⭐</span>
+      <div class="feature-title">Stars & Rewards</div>
+      <div class="feature-desc">Kids earn stars for every correct answer. Badges unlock as they hit milestones. Motivation built-in.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">📊</span>
+      <div class="feature-title">Parent Tracker</div>
+      <div class="feature-desc">See exactly what your child explored — every subject, every session — with beautiful progress charts.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">📱</span>
+      <div class="feature-title">Works on Any Device</div>
+      <div class="feature-desc">Tablet, phone, or computer — big touch targets and a kid-friendly interface that just works.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🔒</span>
+      <div class="feature-title">Safe & Ad-Free</div>
+      <div class="feature-desc">Zero ads, zero tracking, zero popups. Just a clean, safe space for your child to learn and grow.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="social">
+  <div class="section-label">What Parents Are Saying</div>
+  <div class="section-title" style="margin-bottom:40px">Real families, real results 💛</div>
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-text">"My 3-year-old asks for Lumi Learn every morning before breakfast. She now knows all 26 letters and can count to 20. I'm amazed at how fast she picked it up!"</div>
+      <div class="review-author">— <strong>Sarah M.</strong>, Mom of 2, Texas</div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-text">"The parent tracker is what sold me. I can actually see what my son is learning each day. He earned his first 'Super Speller' badge last week and was SO proud."</div>
+      <div class="review-author">— <strong>Marcus T.</strong>, Dad, Florida</div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-text">"We tried ABCmouse and a few others. Lumi Learn is simpler, faster to load, and my daughter just likes it more. The animal sounds are her absolute favorite."</div>
+      <div class="review-author">— <strong>Jamie K.</strong>, Mom, Oregon</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="section-label">Simple Pricing</div>
+  <div class="section-title" style="margin-bottom:10px">One plan. Everything included.</div>
+  <div class="section-sub">No confusing tiers. No hidden fees. Just great learning.</div>
+  <div class="pricing-card reveal">
+    <div class="pricing-badge">🎉 7-Day Free Trial — No Charge Today</div>
+    <div class="pricing-name">Lumi Learn Family</div>
+    <div class="pricing-price"><sup>$</sup>8.99<sub>/mo</sub></div>
+    <div class="pricing-trial">✅ Start free for 7 days, then $8.99/month</div>
+    <ul class="pricing-features">
+      <li>All 12 learning subjects unlocked</li>
+      <li>Unlimited games & puzzles</li>
+      <li>Spelling game with 27+ words</li>
+      <li>Parent progress tracker</li>
+      <li>Stars, badges & rewards</li>
+      <li>Works on all devices</li>
+      <li>100% ad-free forever</li>
+      <li>Cancel anytime — no penalties</li>
+    </ul>
+    <button class="pricing-cta" onclick="openModal('signup')">Start Free Trial → </button>
+    <div class="pricing-note">Cancel anytime before day 7 and you won't be charged a cent.</div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div style="text-align:center;">
+    <div class="section-label">Got Questions?</div>
+    <div class="section-title" style="margin-bottom:40px">Frequently Asked Questions</div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Do I need a credit card to start the free trial? <span class="arrow">▼</span></div>
+      <div class="faq-a">Yes — Stripe (our payment processor) requires a card to start the trial, but you will NOT be charged anything for 7 days. You can cancel at any time before the trial ends and pay nothing.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What age is Lumi Learn designed for? <span class="arrow">▼</span></div>
+      <div class="faq-a">Lumi Learn is designed for ages 2–6. Younger toddlers (2–3) love the alphabet, colors, and animal sounds. Older kids (4–6) get more out of the spelling game, sight words, and learning games.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">How do I cancel? <span class="arrow">▼</span></div>
+      <div class="faq-a">Log in, go to your account, and click "Manage Subscription." You'll be taken to Stripe's secure billing portal where you can cancel in one click. No hoops, no phone calls.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is there a limit on how many kids can use it? <span class="arrow">▼</span></div>
+      <div class="faq-a">One subscription covers your whole family — there's no per-child charge. The parent tracker shows learning progress for all children using the app.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Are there ads or in-app purchases? <span class="arrow">▼</span></div>
+      <div class="faq-a">Absolutely not. Lumi Learn is 100% ad-free. Your subscription is the only cost — there are no surprise purchases, no premium upgrades inside the app, nothing like that.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🌟 Lumi Learn</div>
+  <p>
+    Helping little minds grow, one tap at a time.<br>
+    <a href="/app">Open App</a> &nbsp;·&nbsp;
+    <a href="#" onclick="openModal('login')">Log In</a> &nbsp;·&nbsp;
+    <a href="mailto:hello@lumilearn.com">Contact</a>
+  </p>
+  <p style="margin-top:16px;font-size:11px;opacity:0.5;">© 2026 Lumi Learn. All rights reserved.</p>
+</footer>
+
+<!-- SIGNUP MODAL -->
+<div class="modal-overlay" id="signupModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('signup')">✕</button>
+    <div class="modal-logo"><span class="modal-logo-icon">🌟</span></div>
+    <div class="modal-title">Create Your Account</div>
+    <div class="modal-sub">Start your 7-day free trial — no charge today!</div>
+    <div class="trial-note">🎉 7 days free, then $8.99/month. Cancel anytime.</div>
+    <div class="form-error" id="signupError"></div>
+    <div class="form-group">
+      <label class="form-label">Your Name</label>
+      <input class="form-input" id="signupName" type="text" placeholder="e.g. Sarah"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input class="form-input" id="signupEmail" type="email" placeholder="you@email.com"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-input" id="signupPassword" type="password" placeholder="At least 6 characters"/>
+    </div>
+    <button class="form-submit" id="signupBtn" onclick="doSignup()">Create Account & Start Trial →</button>
+    <div class="form-switch">Already have an account? <a onclick="switchModal('signup','login')">Log in here</a></div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('login')">✕</button>
+    <div class="modal-logo"><span class="modal-logo-icon">🌟</span></div>
+    <div class="modal-title">Welcome Back!</div>
+    <div class="modal-sub">Log in to continue your child's learning journey.</div>
+    <div class="form-error" id="loginError"></div>
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input class="form-input" id="loginEmail" type="email" placeholder="you@email.com"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-input" id="loginPassword" type="password" placeholder="Your password"/>
+    </div>
+    <button class="form-submit" id="loginBtn" onclick="doLogin()">Log In →</button>
+    <div class="form-switch">Don't have an account? <a onclick="switchModal('login','signup')">Start free trial</a></div>
+  </div>
+</div>
+
+<script>
+const API = window.location.origin;
+
+// ── AUTH HELPERS ──
+function getToken(){ return localStorage.getItem('lumiToken'); }
+function setToken(t){ localStorage.setItem('lumiToken', t); }
+function clearToken(){ localStorage.removeItem('lumiToken'); }
+
+// Check if already logged in
+async function checkAuth(){
+  const token = getToken();
+  if(!token) return;
+  try {
+    const res = await fetch(`${API}/api/me`, { headers:{ Authorization:`Bearer ${token}` }});
+    if(!res.ok){ clearToken(); return; }
+    const user = await res.json();
+    handleAuthUser(user);
+  } catch { clearToken(); }
+}
+
+function handleAuthUser(user){
+  const status = user.subscriptionStatus;
+  if(status === 'active' || status === 'trialing'){
+    // Subscribed — go to app
+    window.location.href = '/app';
+  } else if(status === 'none'){
+    // Signed up but hasn't paid — send to checkout
+    startCheckout();
+  } else {
+    // Canceled / past_due
+    showSubscribePrompt();
+  }
+}
+
+// ── MODALS ──
+function openModal(type){
+  document.getElementById(`${type}Modal`).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(type){
+  document.getElementById(`${type}Modal`).classList.remove('open');
+  document.body.style.overflow='';
+}
+function switchModal(from, to){ closeModal(from); openModal(to); }
+
+// Close on overlay click
+document.querySelectorAll('.modal-overlay').forEach(el=>{
+  el.addEventListener('click', e=>{ if(e.target===el) closeModal(el.id.replace('Modal','')); });
+});
+
+// Enter key support
+['signupPassword','loginPassword'].forEach(id=>{
+  document.getElementById(id)?.addEventListener('keydown', e=>{ if(e.key==='Enter') id.includes('signup')?doSignup():doLogin(); });
+});
+
+// ── SIGNUP ──
+async function doSignup(){
+  const name = document.getElementById('signupName').value.trim();
+  const email = document.getElementById('signupEmail').value.trim();
+  const password = document.getElementById('signupPassword').value;
+  const btn = document.getElementById('signupBtn');
+  const errEl = document.getElementById('signupError');
+
+  errEl.style.display='none';
+  if(!name||!email||!password){ showErr('signupError','Please fill in all fields.'); return; }
+
+  btn.disabled=true; btn.textContent='Creating account...';
+
+  try {
+    const res = await fetch(`${API}/api/signup`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({name, email, password})
+    });
+    const data = await res.json();
+    if(!res.ok){ showErr('signupError', data.error||'Something went wrong'); btn.disabled=false; btn.textContent='Create Account & Start Trial →'; return; }
+
+    setToken(data.token);
+    btn.textContent='Redirecting to checkout...';
+    await startCheckout();
+  } catch(err){
+    showErr('signupError','Could not connect. Please try again.');
+    btn.disabled=false; btn.textContent='Create Account & Start Trial →';
+  }
+}
+
+// ── LOGIN ──
+async function doLogin(){
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const btn = document.getElementById('loginBtn');
+
+  document.getElementById('loginError').style.display='none';
+  if(!email||!password){ showErr('loginError','Please enter your email and password.'); return; }
+
+  btn.disabled=true; btn.textContent='Logging in...';
+
+  try {
+    const res = await fetch(`${API}/api/login`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({email, password})
+    });
+    const data = await res.json();
+    if(!res.ok){ showErr('loginError', data.error||'Login failed'); btn.disabled=false; btn.textContent='Log In →'; return; }
+
+    setToken(data.token);
+    handleAuthUser(data.user);
+  } catch {
+    showErr('loginError','Could not connect. Please try again.');
+    btn.disabled=false; btn.textContent='Log In →';
+  }
+}
+
+// ── STRIPE CHECKOUT ──
+async function startCheckout(){
+  const token = getToken();
+  if(!token) return openModal('signup');
+
+  try {
+    const res = await fetch(`${API}/api/create-checkout`, {
+      method:'POST',
+      headers:{'Authorization':`Bearer ${token}`}
+    });
+    const data = await res.json();
+    if(data.url) window.location.href = data.url;
+    else if(data.error === 'You already have an active subscription!') window.location.href='/app';
+    else alert('Could not start checkout: ' + (data.error||'Unknown error'));
+  } catch {
+    alert('Could not start checkout. Please try again.');
+  }
+}
+
+function showSubscribePrompt(){
+  alert('Your subscription has ended. Please restart your plan to continue.');
+  startCheckout();
+}
+
+// ── FAQ ──
+function toggleFaq(el){
+  const item = el.parentElement;
+  item.classList.toggle('open');
+}
+
+// ── ERROR HELPER ──
+function showErr(id, msg){
+  const el = document.getElementById(id);
+  el.textContent = '⚠ ' + msg;
+  el.style.display='block';
+}
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// Check auth on load
+checkAuth();
+
+// Show canceled message if redirected back
+if(new URLSearchParams(location.search).get('canceled')){
+  setTimeout(()=>alert('No worries! Your free trial is still waiting whenever you\'re ready. 🌟'), 500);
+}
+</script>
+</body>
+</html>

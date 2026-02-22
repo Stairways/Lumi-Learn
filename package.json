@@ -1,14 +1,19 @@
 {
-  "name": "lumi-learn",
+  "name": "lumi-learn-pro",
   "version": "1.0.0",
-  "description": "Lumi Learn - Fun Early Learning Website for Kids",
+  "description": "Lumi Learn - Early Learning Subscription App for Kids",
   "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "stripe": "^14.0.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
   },
   "engines": {
     "node": ">=18.0.0"
