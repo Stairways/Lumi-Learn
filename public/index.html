@@ -2,1167 +2,620 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Lumi Learn 🌟 Fun Learning for Kids!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumi Learn — Fun Early Learning for Kids Ages 2–6</title>
+<meta name="description" content="Help your child learn ABCs, numbers, colors, animals, spelling and more — with games, sounds, and rewards they'll love. 7-day free trial, then $8.99/month.">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
 <style>
 :root{
-  --red:#ff4757;--orange:#ff6b35;--yellow:#ffd32a;--green:#2ed573;
-  --blue:#1e90ff;--purple:#a55eea;--pink:#ff6b9d;--teal:#26de81;
-  --bg:#fff9f0;--white:#ffffff;
+  --orange:#ff6b35;--yellow:#ffd32a;--green:#2ed573;--blue:#1e90ff;
+  --purple:#a55eea;--pink:#ff6b9d;--red:#ff4757;
+  --dark:#1a1a2e;--darker:#0f0f1a;
 }
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-body{background:var(--bg);font-family:'Nunito',sans-serif;overflow-x:hidden;}
-body::before{content:'⭐ 🌟 ✨ ⭐ 🌟 ✨ ⭐ 🌟';position:fixed;top:0;left:0;width:200%;font-size:24px;opacity:0.05;animation:starScroll 30s linear infinite;white-space:nowrap;pointer-events:none;z-index:0;}
-@keyframes starScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito',sans-serif;background:#fff9f0;overflow-x:hidden;}
 
-/* HEADER */
-header{background:linear-gradient(135deg,#ff6b35,#ff4757,#a55eea);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 0 rgba(0,0,0,0.15);position:sticky;top:0;z-index:100;}
-.logo{display:flex;align-items:center;gap:10px;}
-.logo-sun{font-size:36px;animation:spin 8s linear infinite;}
+/* ── FLOATING ELEMENTS ── */
+.float{position:absolute;font-size:32px;opacity:0.12;animation:floatAnim 6s ease-in-out infinite;pointer-events:none;user-select:none;}
+@keyframes floatAnim{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-18px) rotate(8deg)}}
+
+/* ── NAVBAR ── */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 32px;
+  background:rgba(255,249,240,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:3px solid rgba(255,107,53,0.1);
+  transition:all 0.3s;
+}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-icon{font-size:28px;animation:spin 8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
-.logo-text{font-family:'Fredoka One',cursive;font-size:28px;color:white;text-shadow:3px 3px 0 rgba(0,0,0,0.2);}
-.logo-sub{font-size:11px;color:rgba(255,255,255,0.85);font-weight:700;letter-spacing:2px;text-transform:uppercase;}
-.header-right{display:flex;align-items:center;gap:10px;}
-.star-counter{background:rgba(255,255,255,0.25);border-radius:20px;padding:7px 14px;display:flex;align-items:center;gap:6px;color:white;font-weight:800;font-size:16px;}
-.parent-btn{background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);border-radius:12px;padding:7px 12px;color:white;font-family:'Fredoka One',cursive;font-size:13px;cursor:pointer;transition:all 0.15s;}
-.parent-btn:hover{background:rgba(255,255,255,0.35);}
+.nav-logo-text{font-family:'Fredoka One',cursive;font-size:24px;color:var(--orange);}
+.nav-actions{display:flex;align-items:center;gap:12px;}
+.nav-link{font-weight:800;font-size:14px;color:#666;cursor:pointer;transition:color 0.2s;background:none;border:none;}
+.nav-link:hover{color:var(--orange);}
+.nav-cta{background:var(--orange);color:white;border:none;border-radius:12px;padding:10px 22px;font-family:'Fredoka One',cursive;font-size:15px;cursor:pointer;box-shadow:0 4px 0 #cc3300;transition:all 0.15s;}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 0 #cc3300;}
+.nav-cta:active{transform:translateY(1px);box-shadow:0 2px 0 #cc3300;}
 
-/* NAV */
-nav{display:flex;gap:8px;padding:12px 16px;overflow-x:auto;background:white;border-bottom:4px solid #ffe0cc;scrollbar-width:none;position:sticky;top:69px;z-index:99;}
-nav::-webkit-scrollbar{display:none;}
-.nav-btn{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;background:var(--bg);border:3px solid #ffe0cc;border-radius:14px;padding:8px 13px;cursor:pointer;transition:all 0.15s;font-family:'Fredoka One',cursive;font-size:11px;color:#555;min-width:60px;}
-.nav-btn:hover,.nav-btn.active{transform:translateY(-3px);box-shadow:0 6px 0 #ffe0cc;border-color:transparent;color:white;}
-.nav-btn span{font-size:22px;}
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  background:linear-gradient(160deg,#fff9f0 0%,#fff0e0 50%,#ffe8d5 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:100px 24px 60px;
+  position:relative;overflow:hidden;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,107,53,0.12);border:2px solid rgba(255,107,53,0.2);
+  border-radius:20px;padding:6px 16px;
+  font-size:13px;font-weight:800;color:var(--orange);
+  margin-bottom:24px;letter-spacing:0.5px;
+  animation:fadeUp 0.6s ease both;
+}
+.hero h1{
+  font-family:'Fredoka One',cursive;
+  font-size:clamp(44px,8vw,80px);
+  line-height:1.1;color:var(--dark);
+  margin-bottom:20px;
+  animation:fadeUp 0.6s ease 0.1s both;
+}
+.hero h1 span{color:var(--orange);}
+.hero-sub{
+  font-size:clamp(16px,2.5vw,22px);font-weight:700;color:#666;
+  max-width:560px;line-height:1.6;margin-bottom:36px;
+  animation:fadeUp 0.6s ease 0.2s both;
+}
+.hero-cta-group{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp 0.6s ease 0.3s both;}
+.hero-cta{
+  background:var(--orange);color:white;border:none;
+  border-radius:16px;padding:18px 36px;
+  font-family:'Fredoka One',cursive;font-size:20px;
+  cursor:pointer;box-shadow:0 6px 0 #cc3300;
+  transition:all 0.15s;text-decoration:none;display:inline-block;
+}
+.hero-cta:hover{transform:translateY(-3px);box-shadow:0 9px 0 #cc3300;}
+.hero-cta:active{transform:translateY(2px);box-shadow:0 2px 0 #cc3300;}
+.hero-cta.secondary{background:white;color:var(--orange);border:3px solid var(--orange);box-shadow:0 6px 0 #ffe0cc;}
+.hero-cta.secondary:hover{box-shadow:0 9px 0 #ffe0cc;}
 
-/* PAGES */
-.page{display:none;padding:20px 16px;max-width:900px;margin:0 auto;position:relative;z-index:1;}
-.page.active{display:block;animation:popIn 0.4s cubic-bezier(0.34,1.56,0.64,1);}
-@keyframes popIn{from{opacity:0;transform:scale(0.93)}to{opacity:1;transform:scale(1)}}
+.hero-trial{font-size:13px;font-weight:800;color:#aaa;margin-top:14px;animation:fadeUp 0.6s ease 0.4s both;}
+.hero-trial span{color:var(--green);}
 
-.section-title{font-family:'Fredoka One',cursive;font-size:32px;text-align:center;margin-bottom:20px;text-shadow:3px 3px 0 rgba(0,0,0,0.06);}
+/* emoji orbit */
+.emoji-orbit{position:absolute;width:100%;height:100%;top:0;left:0;pointer-events:none;}
+.orbit-em{position:absolute;font-size:36px;animation:orbit 20s linear infinite;}
 
-/* GRIDS */
-.grid{display:grid;gap:12px;}
-.g2{grid-template-columns:repeat(2,1fr);}
-.g3{grid-template-columns:repeat(3,1fr);}
-.g4{grid-template-columns:repeat(4,1fr);}
-.g5{grid-template-columns:repeat(5,1fr);}
-@media(max-width:480px){.g5{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(3,1fr)}.g3{grid-template-columns:repeat(2,1fr)}}
+/* ── SUBJECTS STRIP ── */
+.subjects-strip{
+  background:white;border-top:4px solid #ffe0cc;border-bottom:4px solid #ffe0cc;
+  padding:20px 0;overflow:hidden;
+}
+.subjects-track{
+  display:flex;gap:24px;width:max-content;
+  animation:scroll 20s linear infinite;
+}
+.subjects-track:hover{animation-play-state:paused;}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.subject-chip{
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+  background:var(--bg,#fff9f0);border:3px solid #ffe0cc;border-radius:20px;
+  padding:8px 18px;font-family:'Fredoka One',cursive;font-size:15px;color:#555;
+  white-space:nowrap;
+}
+.subject-chip span{font-size:22px;}
 
-/* CARDS */
-.card{border-radius:18px;border:4px solid rgba(0,0,0,0.07);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 10px;cursor:pointer;transition:transform 0.15s;user-select:none;position:relative;overflow:hidden;min-height:90px;}
-.card:hover{transform:translateY(-4px) scale(1.03);}
-.card:active{transform:scale(0.95);}
-.card-emoji{font-size:46px;margin-bottom:5px;transition:transform 0.2s;}
-.card:hover .card-emoji{transform:scale(1.15) rotate(-5deg);}
-.card-label{font-family:'Fredoka One',cursive;font-size:18px;color:white;text-shadow:2px 2px 0 rgba(0,0,0,0.2);}
-.card-sub{font-size:11px;color:rgba(255,255,255,0.85);font-weight:700;margin-top:2px;}
+/* ── FEATURES ── */
+.features{padding:80px 24px;background:#fff9f0;text-align:center;}
+.section-label{font-size:12px;font-weight:800;color:var(--orange);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;}
+.section-title{font-family:'Fredoka One',cursive;font-size:clamp(28px,5vw,46px);color:var(--dark);margin-bottom:12px;}
+.section-sub{font-size:17px;color:#888;font-weight:700;max-width:520px;margin:0 auto 52px;line-height:1.6;}
 
-/* ALPHA CARDS */
-.alpha-card{background:white;border-radius:18px;border:4px solid;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 6px;cursor:pointer;min-height:110px;transition:transform 0.15s;position:relative;overflow:hidden;}
-.alpha-card:hover{transform:translateY(-4px) scale(1.05);}
-.alpha-card:active{transform:scale(0.95);}
-.alpha-letter{font-family:'Fredoka One',cursive;font-size:40px;line-height:1;}
-.alpha-word{font-size:10px;font-weight:800;color:#aaa;text-transform:uppercase;letter-spacing:1px;margin-top:3px;}
-.alpha-pic{font-size:20px;margin-top:2px;}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;max-width:900px;margin:0 auto;}
+.feature-card{
+  background:white;border-radius:24px;padding:32px 24px;
+  border:4px solid #ffe8d5;text-align:left;
+  transition:transform 0.2s,box-shadow 0.2s;
+  position:relative;overflow:hidden;
+}
+.feature-card::before{content:'';position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle at top right,rgba(255,107,53,0.06),transparent 70%);}
+.feature-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(255,107,53,0.12);}
+.feature-icon{font-size:44px;margin-bottom:16px;display:block;}
+.feature-title{font-family:'Fredoka One',cursive;font-size:22px;color:var(--dark);margin-bottom:8px;}
+.feature-desc{font-size:14px;color:#888;font-weight:700;line-height:1.6;}
 
-/* NUMBER CARDS */
-.num-card{background:white;border-radius:18px;border:4px solid;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 8px;cursor:pointer;min-height:120px;transition:transform 0.15s;}
-.num-card:hover{transform:translateY(-4px) scale(1.05);}
-.num-card:active{transform:scale(0.95);}
-.num-big{font-family:'Fredoka One',cursive;font-size:48px;line-height:1;}
-.num-dots{font-size:12px;letter-spacing:1px;margin-top:4px;word-break:break-all;text-align:center;padding:0 4px;line-height:1.4;}
-.num-word{font-size:11px;font-weight:800;color:#aaa;text-transform:uppercase;letter-spacing:1px;margin-top:3px;}
+/* ── SOCIAL PROOF ── */
+.social{background:linear-gradient(135deg,#fff5ee,#ffe8d5);padding:80px 24px;text-align:center;}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:860px;margin:0 auto;}
+.review-card{background:white;border-radius:20px;padding:24px;border:3px solid #ffe0cc;text-align:left;}
+.review-stars{font-size:18px;margin-bottom:12px;letter-spacing:2px;}
+.review-text{font-size:15px;color:#555;font-weight:700;line-height:1.65;margin-bottom:14px;font-style:italic;}
+.review-author{font-size:13px;font-weight:800;color:#888;}
+.review-author strong{color:var(--orange);}
 
-/* COLOR CARDS */
-.color-card{border-radius:22px;border:5px solid rgba(255,255,255,0.5);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 14px;cursor:pointer;min-height:140px;transition:transform 0.15s;box-shadow:0 7px 0 rgba(0,0,0,0.1);}
-.color-card:hover{transform:translateY(-5px) scale(1.04);}
-.color-card:active{transform:scale(0.96);}
-.color-circle{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.35);margin-bottom:10px;border:4px solid rgba(255,255,255,0.6);}
-.color-name{font-family:'Fredoka One',cursive;font-size:22px;color:white;text-shadow:2px 2px 0 rgba(0,0,0,0.2);}
+/* ── PRICING ── */
+.pricing{padding:80px 24px;background:#fff9f0;text-align:center;}
+.pricing-card{
+  background:white;border-radius:28px;padding:44px 40px;
+  border:5px solid var(--orange);max-width:420px;margin:0 auto;
+  box-shadow:0 20px 60px rgba(255,107,53,0.15);
+  position:relative;overflow:hidden;
+}
+.pricing-card::before{content:'MOST POPULAR ⭐';position:absolute;top:18px;right:-28px;background:var(--orange);color:white;font-family:'Fredoka One',cursive;font-size:11px;padding:5px 40px;transform:rotate(45deg);letter-spacing:1px;}
+.pricing-badge{background:rgba(46,213,115,0.12);border:2px solid rgba(46,213,115,0.3);border-radius:20px;padding:6px 16px;font-size:13px;font-weight:800;color:var(--green);display:inline-block;margin-bottom:20px;}
+.pricing-name{font-family:'Fredoka One',cursive;font-size:28px;color:var(--dark);margin-bottom:6px;}
+.pricing-price{font-family:'Fredoka One',cursive;font-size:56px;color:var(--orange);line-height:1;margin-bottom:4px;}
+.pricing-price sup{font-size:28px;vertical-align:top;margin-top:8px;}
+.pricing-price sub{font-size:20px;color:#aaa;}
+.pricing-trial{font-size:14px;font-weight:800;color:var(--green);margin-bottom:28px;}
+.pricing-features{list-style:none;text-align:left;margin-bottom:32px;}
+.pricing-features li{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:2px solid #fff5ee;font-size:15px;font-weight:700;color:#555;}
+.pricing-features li:last-child{border-bottom:none;}
+.pricing-features li::before{content:'✅';font-size:16px;flex-shrink:0;}
+.pricing-cta{width:100%;background:var(--orange);color:white;border:none;border-radius:16px;padding:18px;font-family:'Fredoka One',cursive;font-size:22px;cursor:pointer;box-shadow:0 6px 0 #cc3300;transition:all 0.15s;}
+.pricing-cta:hover{transform:translateY(-2px);box-shadow:0 8px 0 #cc3300;}
+.pricing-note{font-size:12px;color:#aaa;font-weight:700;margin-top:14px;}
 
-/* ANIMAL CARDS */
-.animal-card{background:white;border-radius:18px;border:4px solid;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 8px;cursor:pointer;min-height:120px;transition:transform 0.15s;}
-.animal-card:hover{transform:translateY(-4px) scale(1.05);}
-.animal-card:active{transform:scale(0.95);}
-.animal-emoji{font-size:46px;margin-bottom:5px;transition:transform 0.2s;}
-.animal-card:hover .animal-emoji{transform:scale(1.2) rotate(10deg);}
-.animal-name{font-family:'Fredoka One',cursive;font-size:15px;}
-.animal-sound{font-size:10px;font-weight:700;color:#aaa;margin-top:2px;}
+/* ── FAQ ── */
+.faq{padding:80px 24px;background:linear-gradient(135deg,#fff5ee,#ffe8d5);}
+.faq-list{max-width:680px;margin:0 auto;}
+.faq-item{background:white;border-radius:16px;margin-bottom:12px;border:3px solid #ffe0cc;overflow:hidden;}
+.faq-q{padding:18px 22px;font-family:'Fredoka One',cursive;font-size:18px;color:var(--dark);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background 0.15s;}
+.faq-q:hover{background:#fff5ee;}
+.faq-q .arrow{transition:transform 0.3s;font-size:14px;}
+.faq-a{padding:0 22px;max-height:0;overflow:hidden;transition:all 0.3s;font-size:15px;color:#666;font-weight:700;line-height:1.7;}
+.faq-item.open .faq-q{background:#fff5ee;}
+.faq-item.open .faq-a{padding:0 22px 18px;max-height:200px;}
+.faq-item.open .arrow{transform:rotate(180deg);}
 
-/* SHAPE CARDS */
-.shape-card{background:white;border-radius:18px;border:4px solid #e0e0e0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 10px;cursor:pointer;min-height:120px;transition:transform 0.15s;}
-.shape-card:hover{transform:translateY(-4px) scale(1.05);}
-.shape-name{font-family:'Fredoka One',cursive;font-size:17px;color:#555;margin-top:6px;}
-.shape-sides{font-size:10px;font-weight:700;color:#aaa;margin-top:2px;}
+/* ── FOOTER ── */
+footer{background:var(--dark);color:rgba(255,255,255,0.6);padding:40px 24px;text-align:center;}
+footer .footer-logo{font-family:'Fredoka One',cursive;font-size:24px;color:var(--orange);margin-bottom:12px;}
+footer p{font-size:13px;font-weight:700;line-height:1.8;}
+footer a{color:rgba(255,255,255,0.4);text-decoration:none;}
+footer a:hover{color:var(--orange);}
 
-/* BODY PARTS */
-.body-container{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;}
-.body-diagram{flex-shrink:0;position:relative;width:200px;margin:0 auto;}
-.body-diagram svg{width:100%;height:auto;}
-.body-hotspot{cursor:pointer;transition:opacity 0.2s;}
-.body-hotspot:hover{opacity:0.7;}
-.body-parts-list{flex:1;min-width:250px;}
-.body-part-card{background:white;border:4px solid;border-radius:16px;padding:14px 16px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:transform 0.15s;}
-.body-part-card:hover{transform:translateX(6px);}
-.body-part-card:active{transform:scale(0.97);}
-.body-part-emoji{font-size:32px;}
-.body-part-name{font-family:'Fredoka One',cursive;font-size:20px;}
-.body-part-desc{font-size:12px;color:#888;font-weight:700;margin-top:2px;}
-
-/* SIGHT WORDS */
-.sight-word-card{background:white;border-radius:20px;border:5px solid;padding:28px 16px;cursor:pointer;text-align:center;min-height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform 0.15s;box-shadow:0 5px 0 rgba(0,0,0,0.08);}
-.sight-word-card:hover{transform:translateY(-5px);}
-.sight-word-card:active{transform:scale(0.95);}
-.sight-word{font-family:'Fredoka One',cursive;font-size:36px;margin-bottom:6px;}
-.sight-sentence{font-size:12px;font-weight:700;color:#aaa;line-height:1.4;}
-.sight-level{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-top:4px;}
-
-.level-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;justify-content:center;}
-.level-tab{padding:8px 18px;border-radius:20px;border:3px solid #ffe0cc;background:white;font-family:'Fredoka One',cursive;font-size:15px;cursor:pointer;transition:all 0.15s;color:#888;}
-.level-tab.active{background:var(--orange);color:white;border-color:var(--orange);}
-
-/* SPELLING GAME */
-.spell-box{background:white;border-radius:22px;border:4px solid #ffe0cc;padding:24px;box-shadow:0 6px 0 #ffe0cc;margin-bottom:20px;}
-.spell-title{font-family:'Fredoka One',cursive;font-size:22px;color:#ff6b35;margin-bottom:6px;}
-.spell-sub{font-size:13px;color:#888;font-weight:700;margin-bottom:20px;}
-.spell-word-display{text-align:center;margin-bottom:20px;}
-.spell-emoji{font-size:80px;display:block;margin-bottom:10px;animation:float 2s ease-in-out infinite;}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.spell-hint{font-family:'Fredoka One',cursive;font-size:20px;color:#888;margin-bottom:6px;}
-.spell-blanks{display:flex;gap:8px;justify-content:center;margin-bottom:20px;flex-wrap:wrap;}
-.spell-blank{width:44px;height:52px;border-radius:10px;border:3px solid #ffe0cc;background:var(--bg);display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:24px;color:#333;transition:all 0.2s;}
-.spell-blank.filled{border-color:#ff6b35;background:#fff5ee;}
-.spell-blank.correct{border-color:#2ed573;background:#d4f5e7;color:#2ed573;}
-.spell-blank.wrong{border-color:#ff4757;background:#fde8eb;animation:wrongShake 0.3s ease;}
-@keyframes wrongShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.spell-letters{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;}
-.spell-letter-btn{width:48px;height:52px;border-radius:12px;border:4px solid #ffe0cc;background:white;font-family:'Fredoka One',cursive;font-size:22px;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;justify-content:center;}
-.spell-letter-btn:hover:not(:disabled){transform:translateY(-3px);border-color:#ff6b35;background:#fff5ee;}
-.spell-letter-btn:disabled{opacity:0.3;cursor:not-allowed;}
-.spell-letter-btn.used{opacity:0.2;pointer-events:none;}
-.spell-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
-.spell-btn{background:var(--bg);border:3px solid #ffe0cc;border-radius:12px;padding:9px 18px;font-family:'Fredoka One',cursive;font-size:15px;cursor:pointer;transition:all 0.15s;}
-.spell-btn:hover{background:#ff6b35;color:white;border-color:#ff6b35;}
-.spell-score-row{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
-.score-badge{background:#ffd32a;border-radius:12px;padding:5px 12px;font-family:'Fredoka One',cursive;font-size:15px;color:#333;}
-
-/* GAMES */
-.game-box{background:white;border-radius:22px;border:4px solid #ffe0cc;padding:22px;margin-bottom:18px;box-shadow:0 6px 0 #ffe0cc;}
-.game-title{font-family:'Fredoka One',cursive;font-size:22px;color:#ff6b35;margin-bottom:4px;}
-.game-sub{font-size:13px;color:#888;font-weight:700;margin-bottom:16px;}
-.game-question{font-family:'Fredoka One',cursive;font-size:26px;text-align:center;margin-bottom:16px;color:#333;}
-.game-choices{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-.game-choice{background:var(--bg);border:4px solid #ffe0cc;border-radius:14px;padding:14px;text-align:center;cursor:pointer;font-family:'Fredoka One',cursive;font-size:20px;transition:all 0.15s;}
-.game-choice:hover{transform:translateY(-3px);border-color:#ff6b35;background:#fff5ee;}
-.game-choice.correct{background:#d4edda;border-color:#2ed573;color:#155724;animation:correctBounce 0.4s ease;}
-.game-choice.wrong{background:#f8d7da;border-color:#ff4757;color:#721c24;animation:wrongShake 0.3s ease;}
-@keyframes correctBounce{0%{transform:scale(1)}40%{transform:scale(1.1)}100%{transform:scale(1)}}
-.next-btn{display:block;margin:14px auto 0;background:linear-gradient(135deg,#ff6b35,#ff4757);color:white;border:none;border-radius:14px;padding:12px 28px;font-family:'Fredoka One',cursive;font-size:18px;cursor:pointer;box-shadow:0 5px 0 #cc3300;transition:all 0.15s;}
-.next-btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 #cc3300;}
-.next-btn:active{transform:translateY(2px);box-shadow:0 2px 0 #cc3300;}
-
-/* PUZZLE */
-.puzzle-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;}
-.puzzle-tile{aspect-ratio:1;background:white;border:4px solid #ffe0cc;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:32px;cursor:pointer;transition:all 0.2s;}
-.puzzle-tile.flipped{background:linear-gradient(135deg,#ff6b35,#ff4757);border-color:#ff4757;}
-.puzzle-tile.matched{background:linear-gradient(135deg,#2ed573,#26de81);border-color:#2ed573;cursor:default;}
-.puzzle-tile:hover:not(.matched){transform:scale(1.06);}
-
-/* DRAW */
-.draw-area{background:white;border:4px solid #ffe0cc;border-radius:18px;display:flex;flex-direction:column;align-items:center;padding:14px;margin-bottom:14px;}
-canvas{border-radius:10px;border:3px dashed #ffb347;touch-action:none;cursor:crosshair;max-width:100%;}
-.color-picker{display:flex;gap:7px;margin:10px 0;flex-wrap:wrap;justify-content:center;}
-.color-dot{width:34px;height:34px;border-radius:50%;cursor:pointer;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.2);transition:transform 0.15s;}
-.color-dot:hover,.color-dot.selected{transform:scale(1.3);}
-.draw-btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
-.draw-btn{background:var(--bg);border:3px solid #ffe0cc;border-radius:10px;padding:7px 13px;font-family:'Fredoka One',cursive;font-size:13px;cursor:pointer;transition:all 0.15s;}
-.draw-btn:hover{background:#ff6b35;color:white;border-color:#ff6b35;}
-
-/* PARENT TRACKER */
-.tracker-header{background:linear-gradient(135deg,#667eea,#764ba2);border-radius:20px;padding:24px;color:white;margin-bottom:20px;text-align:center;}
-.tracker-title{font-family:'Fredoka One',cursive;font-size:28px;margin-bottom:6px;}
-.tracker-sub{font-size:14px;opacity:0.85;font-weight:700;}
-.tracker-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
-.t-stat{background:white;border-radius:16px;padding:18px;text-align:center;border:4px solid #e8e0ff;transition:transform 0.15s;}
-.t-stat:hover{transform:translateY(-3px);}
-.t-stat-val{font-family:'Fredoka One',cursive;font-size:32px;color:#667eea;margin-bottom:4px;}
-.t-stat-label{font-size:12px;font-weight:800;color:#888;text-transform:uppercase;letter-spacing:1px;}
-.tracker-section{background:white;border-radius:18px;border:4px solid #e8e0ff;padding:20px;margin-bottom:14px;}
-.tracker-section-title{font-family:'Fredoka One',cursive;font-size:20px;color:#667eea;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.progress-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
-.progress-label{font-weight:800;font-size:13px;color:#555;min-width:100px;}
-.progress-bar-bg{flex:1;height:14px;background:#f0ecff;border-radius:7px;overflow:hidden;}
-.progress-bar-fill{height:100%;border-radius:7px;background:linear-gradient(90deg,#667eea,#764ba2);transition:width 1s ease;}
-.progress-pct{font-family:'Fredoka One',cursive;font-size:14px;color:#667eea;min-width:36px;text-align:right;}
-.activity-log{max-height:240px;overflow-y:auto;}
-.activity-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:2px solid #f5f5f5;}
-.activity-item:last-child{border-bottom:none;}
-.activity-emoji{font-size:24px;}
-.activity-text{flex:1;font-size:13px;font-weight:700;color:#555;}
-.activity-time{font-size:11px;color:#aaa;font-weight:700;}
-.badge-grid{display:flex;gap:10px;flex-wrap:wrap;}
-.badge-item{background:linear-gradient(135deg,#ffd32a,#ff9500);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:8px;font-family:'Fredoka One',cursive;font-size:14px;color:white;box-shadow:0 3px 0 rgba(0,0,0,0.1);}
-.badge-item.locked{background:#e0e0e0;color:#aaa;box-shadow:none;}
-.badge-emoji{font-size:22px;}
-.reset-btn{background:#ff4757;color:white;border:none;border-radius:12px;padding:10px 20px;font-family:'Fredoka One',cursive;font-size:16px;cursor:pointer;transition:all 0.15s;margin-top:16px;}
-.reset-btn:hover{background:#cc0022;}
-
-/* CELEBRATION */
-.celebrate{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:999;display:none;align-items:center;justify-content:center;}
-.celebrate.show{display:flex;animation:fadeIn 0.3s ease;}
-.celebrate-box{background:white;border-radius:28px;padding:36px;text-align:center;border:6px solid #ffd32a;box-shadow:0 10px 40px rgba(0,0,0,0.3);animation:popIn 0.4s cubic-bezier(0.34,1.56,0.64,1);max-width:300px;width:90%;}
-.celebrate-emoji{font-size:72px;display:block;animation:bounce 0.5s infinite alternate;}
-@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(-12px)}}
-.celebrate-title{font-family:'Fredoka One',cursive;font-size:32px;color:#ff6b35;margin:10px 0 5px;}
-.celebrate-sub{font-size:15px;font-weight:700;color:#888;margin-bottom:18px;}
-.celebrate-close{background:linear-gradient(135deg,#ff6b35,#ff4757);color:white;border:none;border-radius:14px;padding:12px 28px;font-family:'Fredoka One',cursive;font-size:20px;cursor:pointer;box-shadow:0 5px 0 #cc3300;}
+/* ── MODALS ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;animation:fadeIn 0.25s ease;}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.confetti-piece{position:fixed;animation:confettiFall 2.5s ease-in forwards;pointer-events:none;z-index:1000;}
-@keyframes confettiFall{0%{transform:translateY(-20px) rotate(0);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+.modal{background:white;border-radius:28px;padding:36px 32px;width:100%;max-width:420px;position:relative;animation:slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1);}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.modal-close{position:absolute;top:16px;right:18px;background:none;border:none;font-size:22px;cursor:pointer;color:#aaa;transition:color 0.15s;}
+.modal-close:hover{color:var(--dark);}
+.modal-logo{text-align:center;margin-bottom:20px;}
+.modal-logo-icon{font-size:44px;}
+.modal-title{font-family:'Fredoka One',cursive;font-size:28px;color:var(--dark);text-align:center;margin-bottom:6px;}
+.modal-sub{font-size:14px;color:#888;font-weight:700;text-align:center;margin-bottom:24px;line-height:1.5;}
+.form-group{margin-bottom:16px;}
+.form-label{display:block;font-size:12px;font-weight:800;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+.form-input{width:100%;background:#fff9f0;border:3px solid #ffe0cc;border-radius:12px;padding:12px 16px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;color:var(--dark);outline:none;transition:border-color 0.2s;}
+.form-input:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,107,53,0.1);}
+.form-submit{width:100%;background:var(--orange);color:white;border:none;border-radius:14px;padding:15px;font-family:'Fredoka One',cursive;font-size:20px;cursor:pointer;box-shadow:0 5px 0 #cc3300;transition:all 0.15s;margin-top:6px;}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 7px 0 #cc3300;}
+.form-submit:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:0 3px 0 #cc3300;}
+.form-error{background:#fde8eb;border:2px solid #ff4757;border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;color:#cc0022;margin-bottom:14px;display:none;}
+.form-switch{text-align:center;margin-top:16px;font-size:14px;font-weight:700;color:#888;}
+.form-switch a{color:var(--orange);cursor:pointer;text-decoration:none;font-weight:800;}
+.form-switch a:hover{text-decoration:underline;}
+.trial-note{background:rgba(46,213,115,0.1);border:2px solid rgba(46,213,115,0.3);border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;color:#1aaa55;margin-bottom:16px;text-align:center;}
 
-/* HOME */
-.home-hero{text-align:center;padding:16px 0 24px;}
-.home-hero h1{font-family:'Fredoka One',cursive;font-size:44px;background:linear-gradient(135deg,#ff6b35,#a55eea,#1e90ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;}
-.home-hero p{font-size:16px;color:#888;font-weight:700;margin-bottom:24px;}
-.home-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-@media(min-width:600px){.home-cards{grid-template-columns:repeat(4,1fr);}}
-@media(max-width:400px){.home-cards{grid-template-columns:repeat(2,1fr);}}
-
-.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,0.4);width:20px;height:20px;animation:rippleOut 0.5s ease-out forwards;pointer-events:none;}
-@keyframes rippleOut{to{width:200px;height:200px;margin:-90px;opacity:0;}}
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:all 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">
-    <div class="logo-sun">🌟</div>
-    <div>
-      <div class="logo-text">Lumi Learn</div>
-      <div class="logo-sub">Fun Learning for Kids!</div>
-    </div>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a class="nav-logo" href="/">
+    <span class="nav-logo-icon">🌟</span>
+    <span class="nav-logo-text">Lumi Learn</span>
+  </a>
+  <div class="nav-actions">
+    <button class="nav-link" onclick="openModal('login')">Log In</button>
+    <button class="nav-cta" onclick="openModal('signup')">Start Free Trial ✨</button>
   </div>
-  <div class="header-right">
-    <div class="star-counter">⭐ <span id="starCount">0</span></div>
-    <button class="parent-btn" onclick="showPage('tracker',getBtn('tracker'))">👩‍👦 Parents</button>
-  </div>
-</header>
-
-<nav id="mainNav">
-  <div class="nav-btn active" onclick="showPage('home',this)"><span>🏠</span>Home</div>
-  <div class="nav-btn" onclick="showPage('alphabet',this)"><span>🔤</span>ABC</div>
-  <div class="nav-btn" onclick="showPage('numbers',this)"><span>🔢</span>123</div>
-  <div class="nav-btn" onclick="showPage('colors',this)"><span>🎨</span>Colors</div>
-  <div class="nav-btn" onclick="showPage('animals',this)"><span>🐾</span>Animals</div>
-  <div class="nav-btn" onclick="showPage('shapes',this)"><span>🔷</span>Shapes</div>
-  <div class="nav-btn" onclick="showPage('body',this)"><span>🧑</span>Body</div>
-  <div class="nav-btn" onclick="showPage('sightwords',this)"><span>👁️</span>Words</div>
-  <div class="nav-btn" onclick="showPage('spelling',this)"><span>✍️</span>Spelling</div>
-  <div class="nav-btn" onclick="showPage('games',this)"><span>🎮</span>Games</div>
-  <div class="nav-btn" onclick="showPage('puzzle',this)"><span>🧩</span>Puzzle</div>
-  <div class="nav-btn" onclick="showPage('draw',this)"><span>✏️</span>Draw</div>
-  <div class="nav-btn" onclick="showPage('tracker',this)"><span>📊</span>Tracker</div>
 </nav>
 
-<!-- HOME -->
-<div class="page active" id="page-home">
-  <div class="home-hero">
-    <h1>Hello, Explorer! 👋</h1>
-    <p>What would you like to learn today?</p>
+<!-- HERO -->
+<section class="hero">
+  <!-- floating emojis -->
+  <div class="float" style="top:12%;left:5%;animation-delay:0s">🔤</div>
+  <div class="float" style="top:18%;right:7%;animation-delay:1s">🐶</div>
+  <div class="float" style="top:60%;left:3%;animation-delay:2s">⭐</div>
+  <div class="float" style="top:70%;right:5%;animation-delay:0.5s">🎨</div>
+  <div class="float" style="top:40%;left:8%;animation-delay:1.5s">🔢</div>
+  <div class="float" style="top:35%;right:10%;animation-delay:2.5s">🌈</div>
+
+  <div class="hero-badge">🌟 Trusted by 1,000+ Families</div>
+  <h1>Learning That Kids<br><span>Actually Love</span> 🎉</h1>
+  <p class="hero-sub">ABCs, numbers, colors, animals, spelling games, and more — all designed for little hands and big imaginations. Ages 2–6.</p>
+  <div class="hero-cta-group">
+    <button class="hero-cta" onclick="openModal('signup')">Start 7-Day Free Trial →</button>
+    <a class="hero-cta secondary" href="/app">Preview the App 👀</a>
   </div>
-  <div class="home-cards" id="homeCards"></div>
-</div>
+  <div class="hero-trial">
+    <span>✅ 7 days completely free</span> &nbsp;·&nbsp; No credit card tricks &nbsp;·&nbsp; Cancel anytime
+  </div>
+</section>
 
-<!-- ALPHABET -->
-<div class="page" id="page-alphabet">
-  <div class="section-title" style="color:#a55eea">🔤 The Alphabet!</div>
-  <div class="grid g5" id="alphabetGrid"></div>
-</div>
-
-<!-- NUMBERS -->
-<div class="page" id="page-numbers">
-  <div class="section-title" style="color:#1e90ff">🔢 Numbers!</div>
-  <div class="grid g4" id="numbersGrid"></div>
-</div>
-
-<!-- COLORS -->
-<div class="page" id="page-colors">
-  <div class="section-title" style="color:#ff4757">🎨 Colors!</div>
-  <div class="grid g3" id="colorsGrid"></div>
-</div>
-
-<!-- ANIMALS -->
-<div class="page" id="page-animals">
-  <div class="section-title" style="color:#2ed573">🐾 Animals!</div>
-  <p style="text-align:center;color:#888;font-weight:700;margin-bottom:14px;font-size:14px;">Tap to hear the sound! 🔊</p>
-  <div class="grid g4" id="animalsGrid"></div>
-</div>
-
-<!-- SHAPES -->
-<div class="page" id="page-shapes">
-  <div class="section-title" style="color:#ff9500">🔷 Shapes!</div>
-  <div class="grid g3" id="shapesGrid"></div>
-</div>
-
-<!-- BODY PARTS -->
-<div class="page" id="page-body">
-  <div class="section-title" style="color:#ff6b9d">🧑 Body Parts!</div>
-  <p style="text-align:center;color:#888;font-weight:700;margin-bottom:16px;font-size:14px;">Tap a body part to learn about it! 🔊</p>
-  <div class="grid g3" id="bodyGrid"></div>
-</div>
-
-<!-- SIGHT WORDS -->
-<div class="page" id="page-sightwords">
-  <div class="section-title" style="color:#1e90ff">👁️ Sight Words!</div>
-  <p style="text-align:center;color:#888;font-weight:700;margin-bottom:14px;font-size:14px;">Tap a word to hear it! 🔊</p>
-  <div class="level-tabs" id="sightTabs"></div>
-  <div class="grid g3" id="sightGrid"></div>
-</div>
-
-<!-- SPELLING -->
-<div class="page" id="page-spelling">
-  <div class="section-title" style="color:#26de81">✍️ Spelling!</div>
-  <div class="spell-box">
-    <div class="spell-title">🔤 Spell It Out!</div>
-    <div class="spell-sub">Tap the letters in the right order to spell the word!</div>
-    <div class="spell-score-row">
-      <div class="score-badge">⭐ Score: <span id="spScore">0</span></div>
-      <div class="score-badge">🔥 Streak: <span id="spStreak">0</span></div>
-    </div>
-    <div class="spell-word-display">
-      <span class="spell-emoji" id="spEmoji">🍎</span>
-      <div class="spell-hint" id="spHint">Spell: APPLE</div>
-    </div>
-    <div class="spell-blanks" id="spBlanks"></div>
-    <div class="spell-letters" id="spLetters"></div>
-    <div class="spell-controls">
-      <button class="spell-btn" onclick="clearSpelling()">🗑️ Clear</button>
-      <button class="spell-btn" onclick="nextSpelling()">⏭️ Skip</button>
-    </div>
+<!-- SUBJECTS SCROLLING STRIP -->
+<div class="subjects-strip">
+  <div class="subjects-track">
+    <div class="subject-chip"><span>🔤</span> Alphabet</div>
+    <div class="subject-chip"><span>🔢</span> Numbers 1–20</div>
+    <div class="subject-chip"><span>🎨</span> Colors</div>
+    <div class="subject-chip"><span>🐾</span> Animal Sounds</div>
+    <div class="subject-chip"><span>🔷</span> Shapes</div>
+    <div class="subject-chip"><span>🧑</span> Body Parts</div>
+    <div class="subject-chip"><span>👁️</span> Sight Words</div>
+    <div class="subject-chip"><span>✍️</span> Spelling Games</div>
+    <div class="subject-chip"><span>🎮</span> Learning Games</div>
+    <div class="subject-chip"><span>🧩</span> Memory Puzzle</div>
+    <div class="subject-chip"><span>✏️</span> Art Studio</div>
+    <div class="subject-chip"><span>📊</span> Parent Tracker</div>
+    <!-- duplicate for infinite scroll -->
+    <div class="subject-chip"><span>🔤</span> Alphabet</div>
+    <div class="subject-chip"><span>🔢</span> Numbers 1–20</div>
+    <div class="subject-chip"><span>🎨</span> Colors</div>
+    <div class="subject-chip"><span>🐾</span> Animal Sounds</div>
+    <div class="subject-chip"><span>🔷</span> Shapes</div>
+    <div class="subject-chip"><span>🧑</span> Body Parts</div>
+    <div class="subject-chip"><span>👁️</span> Sight Words</div>
+    <div class="subject-chip"><span>✍️</span> Spelling Games</div>
+    <div class="subject-chip"><span>🎮</span> Learning Games</div>
+    <div class="subject-chip"><span>🧩</span> Memory Puzzle</div>
+    <div class="subject-chip"><span>✏️</span> Art Studio</div>
+    <div class="subject-chip"><span>📊</span> Parent Tracker</div>
   </div>
 </div>
 
-<!-- GAMES -->
-<div class="page" id="page-games">
-  <div class="section-title" style="color:#ff6b9d">🎮 Learning Games!</div>
-  <div class="game-box">
-    <div class="game-title">🔤 Letter Match!</div>
-    <div class="game-sub">Which picture starts with this letter?</div>
-    <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
-      <div class="score-badge">⭐ <span id="lgScore">0</span></div>
-      <div class="score-badge">🔥 <span id="lgStreak">0</span> streak</div>
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-label">Why Parents Choose Lumi Learn</div>
+  <div class="section-title">Everything a growing mind needs</div>
+  <div class="section-sub">Built from the ground up for ages 2–6. Every tap, sound, and game is designed to make learning feel like play.</div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <span class="feature-icon">🔊</span>
+      <div class="feature-title">Sound & Voice</div>
+      <div class="feature-desc">Every letter, number, animal and word is spoken aloud. Kids learn by hearing, not just seeing.</div>
     </div>
-    <div class="game-question" id="lgQuestion"></div>
-    <div class="game-choices" id="lgChoices"></div>
-    <button class="next-btn" id="lgNext" onclick="nextLetterGame()" style="display:none">Next! →</button>
-  </div>
-  <div class="game-box">
-    <div class="game-title">🔢 Count It!</div>
-    <div class="game-sub">How many can you count?</div>
-    <div style="display:flex;gap:10px;margin-bottom:14px;">
-      <div class="score-badge">⭐ <span id="cgScore">0</span></div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🎮</span>
+      <div class="feature-title">Games, Not Drills</div>
+      <div class="feature-desc">Letter match, counting games, color quiz, memory puzzle — learning disguised as pure fun.</div>
     </div>
-    <div class="game-question" id="cgQuestion"></div>
-    <div class="game-choices" id="cgChoices" style="grid-template-columns:repeat(4,1fr)"></div>
-    <button class="next-btn" id="cgNext" onclick="nextCountGame()" style="display:none">Next! →</button>
-  </div>
-  <div class="game-box">
-    <div class="game-title">🎨 What Color?</div>
-    <div class="game-sub">Tap the right color!</div>
-    <div style="display:flex;gap:10px;margin-bottom:14px;">
-      <div class="score-badge">⭐ <span id="colorScore">0</span></div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">⭐</span>
+      <div class="feature-title">Stars & Rewards</div>
+      <div class="feature-desc">Kids earn stars for every correct answer. Badges unlock as they hit milestones. Motivation built-in.</div>
     </div>
-    <div class="game-question" id="colorQuestion"></div>
-    <div class="game-choices" id="colorChoices"></div>
-    <button class="next-btn" id="colorNext" onclick="nextColorGame()" style="display:none">Next! →</button>
-  </div>
-</div>
-
-<!-- PUZZLE -->
-<div class="page" id="page-puzzle">
-  <div class="section-title" style="color:#26de81">🧩 Memory Match!</div>
-  <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
-    <div class="score-badge">🎯 Pairs: <span id="pairsFound">0</span>/<span id="pairsTotal">8</span></div>
-    <div class="score-badge">👆 Moves: <span id="moveCount">0</span></div>
-  </div>
-  <div class="puzzle-grid" id="puzzleGrid"></div>
-  <button class="next-btn" onclick="initPuzzle()">🔀 New Game</button>
-</div>
-
-<!-- DRAW -->
-<div class="page" id="page-draw">
-  <div class="section-title" style="color:#ff6b35">✏️ Art Studio!</div>
-  <div class="draw-area">
-    <canvas id="drawCanvas" width="500" height="320"></canvas>
-    <div class="color-picker" id="colorPicker"></div>
-    <div class="draw-btns">
-      <button class="draw-btn" onclick="setTool('pen')">✏️ Pen</button>
-      <button class="draw-btn" onclick="setTool('eraser')">🧹 Eraser</button>
-      <button class="draw-btn" onclick="setSize(5)">Small</button>
-      <button class="draw-btn" onclick="setSize(12)">Medium</button>
-      <button class="draw-btn" onclick="setSize(24)">Big</button>
-      <button class="draw-btn" style="background:#ff4757;color:white;border-color:#ff4757" onclick="clearCanvas()">🗑️ Clear</button>
+    <div class="feature-card reveal">
+      <span class="feature-icon">📊</span>
+      <div class="feature-title">Parent Tracker</div>
+      <div class="feature-desc">See exactly what your child explored — every subject, every session — with beautiful progress charts.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">📱</span>
+      <div class="feature-title">Works on Any Device</div>
+      <div class="feature-desc">Tablet, phone, or computer — big touch targets and a kid-friendly interface that just works.</div>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🔒</span>
+      <div class="feature-title">Safe & Ad-Free</div>
+      <div class="feature-desc">Zero ads, zero tracking, zero popups. Just a clean, safe space for your child to learn and grow.</div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- TRACKER -->
-<div class="page" id="page-tracker">
-  <div class="tracker-header">
-    <div class="tracker-title">📊 Learning Tracker</div>
-    <div class="tracker-sub">See what your child has been learning!</div>
-  </div>
-  <div class="tracker-stats">
-    <div class="t-stat"><div class="t-stat-val" id="t-stars">0</div><div class="t-stat-label">⭐ Stars Earned</div></div>
-    <div class="t-stat"><div class="t-stat-val" id="t-taps">0</div><div class="t-stat-label">👆 Total Taps</div></div>
-    <div class="t-stat"><div class="t-stat-val" id="t-sessions">0</div><div class="t-stat-label">📅 Activities</div></div>
-  </div>
-  <div class="tracker-section">
-    <div class="tracker-section-title">📈 Progress by Subject</div>
-    <div id="progressBars"></div>
-  </div>
-  <div class="tracker-section">
-    <div class="tracker-section-title">🏆 Badges Earned</div>
-    <div class="badge-grid" id="badgeGrid"></div>
-  </div>
-  <div class="tracker-section">
-    <div class="tracker-section-title">📝 Recent Activity</div>
-    <div class="activity-log" id="activityLog">
-      <div style="text-align:center;color:#aaa;padding:20px;font-weight:700;">No activity yet — start learning!</div>
+<!-- SOCIAL PROOF -->
+<section class="social">
+  <div class="section-label">What Parents Are Saying</div>
+  <div class="section-title" style="margin-bottom:40px">Real families, real results 💛</div>
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-text">"My 3-year-old asks for Lumi Learn every morning before breakfast. She now knows all 26 letters and can count to 20. I'm amazed at how fast she picked it up!"</div>
+      <div class="review-author">— <strong>Sarah M.</strong>, Mom of 2, Texas</div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-text">"The parent tracker is what sold me. I can actually see what my son is learning each day. He earned his first 'Super Speller' badge last week and was SO proud."</div>
+      <div class="review-author">— <strong>Marcus T.</strong>, Dad, Florida</div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <div class="review-text">"We tried ABCmouse and a few others. Lumi Learn is simpler, faster to load, and my daughter just likes it more. The animal sounds are her absolute favorite."</div>
+      <div class="review-author">— <strong>Jamie K.</strong>, Mom, Oregon</div>
     </div>
   </div>
-  <button class="reset-btn" onclick="resetTracker()">🗑️ Reset Progress</button>
+</section>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="section-label">Simple Pricing</div>
+  <div class="section-title" style="margin-bottom:10px">One plan. Everything included.</div>
+  <div class="section-sub">No confusing tiers. No hidden fees. Just great learning.</div>
+  <div class="pricing-card reveal">
+    <div class="pricing-badge">🎉 7-Day Free Trial — No Charge Today</div>
+    <div class="pricing-name">Lumi Learn Family</div>
+    <div class="pricing-price"><sup>$</sup>8.99<sub>/mo</sub></div>
+    <div class="pricing-trial">✅ Start free for 7 days, then $8.99/month</div>
+    <ul class="pricing-features">
+      <li>All 12 learning subjects unlocked</li>
+      <li>Unlimited games & puzzles</li>
+      <li>Spelling game with 27+ words</li>
+      <li>Parent progress tracker</li>
+      <li>Stars, badges & rewards</li>
+      <li>Works on all devices</li>
+      <li>100% ad-free forever</li>
+      <li>Cancel anytime — no penalties</li>
+    </ul>
+    <button class="pricing-cta" onclick="openModal('signup')">Start Free Trial → </button>
+    <div class="pricing-note">Cancel anytime before day 7 and you won't be charged a cent.</div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div style="text-align:center;">
+    <div class="section-label">Got Questions?</div>
+    <div class="section-title" style="margin-bottom:40px">Frequently Asked Questions</div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Do I need a credit card to start the free trial? <span class="arrow">▼</span></div>
+      <div class="faq-a">Yes — Stripe (our payment processor) requires a card to start the trial, but you will NOT be charged anything for 7 days. You can cancel at any time before the trial ends and pay nothing.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What age is Lumi Learn designed for? <span class="arrow">▼</span></div>
+      <div class="faq-a">Lumi Learn is designed for ages 2–6. Younger toddlers (2–3) love the alphabet, colors, and animal sounds. Older kids (4–6) get more out of the spelling game, sight words, and learning games.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">How do I cancel? <span class="arrow">▼</span></div>
+      <div class="faq-a">Log in, go to your account, and click "Manage Subscription." You'll be taken to Stripe's secure billing portal where you can cancel in one click. No hoops, no phone calls.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is there a limit on how many kids can use it? <span class="arrow">▼</span></div>
+      <div class="faq-a">One subscription covers your whole family — there's no per-child charge. The parent tracker shows learning progress for all children using the app.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Are there ads or in-app purchases? <span class="arrow">▼</span></div>
+      <div class="faq-a">Absolutely not. Lumi Learn is 100% ad-free. Your subscription is the only cost — there are no surprise purchases, no premium upgrades inside the app, nothing like that.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🌟 Lumi Learn</div>
+  <p>
+    Helping little minds grow, one tap at a time.<br>
+    <a href="/app">Open App</a> &nbsp;·&nbsp;
+    <a href="#" onclick="openModal('login')">Log In</a> &nbsp;·&nbsp;
+    <a href="mailto:hello@lumilearn.com">Contact</a>
+  </p>
+  <p style="margin-top:16px;font-size:11px;opacity:0.5;">© 2026 Lumi Learn. All rights reserved.</p>
+</footer>
+
+<!-- SIGNUP MODAL -->
+<div class="modal-overlay" id="signupModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('signup')">✕</button>
+    <div class="modal-logo"><span class="modal-logo-icon">🌟</span></div>
+    <div class="modal-title">Create Your Account</div>
+    <div class="modal-sub">Start your 7-day free trial — no charge today!</div>
+    <div class="trial-note">🎉 7 days free, then $8.99/month. Cancel anytime.</div>
+    <div class="form-error" id="signupError"></div>
+    <div class="form-group">
+      <label class="form-label">Your Name</label>
+      <input class="form-input" id="signupName" type="text" placeholder="e.g. Sarah"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input class="form-input" id="signupEmail" type="email" placeholder="you@email.com"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-input" id="signupPassword" type="password" placeholder="At least 6 characters"/>
+    </div>
+    <button class="form-submit" id="signupBtn" onclick="doSignup()">Create Account & Start Trial →</button>
+    <div class="form-switch">Already have an account? <a onclick="switchModal('signup','login')">Log in here</a></div>
+  </div>
 </div>
 
-<!-- CELEBRATION MODAL -->
-<div class="celebrate" id="celebrateModal">
-  <div class="celebrate-box">
-    <span class="celebrate-emoji" id="celebEmoji">🎉</span>
-    <div class="celebrate-title" id="celebTitle">Amazing!</div>
-    <div class="celebrate-sub" id="celebSub">You did it!</div>
-    <button class="celebrate-close" onclick="closeCelebrate()">Yay! ⭐</button>
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('login')">✕</button>
+    <div class="modal-logo"><span class="modal-logo-icon">🌟</span></div>
+    <div class="modal-title">Welcome Back!</div>
+    <div class="modal-sub">Log in to continue your child's learning journey.</div>
+    <div class="form-error" id="loginError"></div>
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input class="form-input" id="loginEmail" type="email" placeholder="you@email.com"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-input" id="loginPassword" type="password" placeholder="Your password"/>
+    </div>
+    <button class="form-submit" id="loginBtn" onclick="doLogin()">Log In →</button>
+    <div class="form-switch">Don't have an account? <a onclick="switchModal('login','signup')">Start free trial</a></div>
   </div>
 </div>
 
 <script>
-// ══════════════════════════════════════════════════════
-// DATA
-// ══════════════════════════════════════════════════════
-const LETTERS=[
-  {l:'A',w:'Apple',e:'🍎'},{l:'B',w:'Ball',e:'⚽'},{l:'C',w:'Cat',e:'🐱'},
-  {l:'D',w:'Dog',e:'🐶'},{l:'E',w:'Egg',e:'🥚'},{l:'F',w:'Fish',e:'🐟'},
-  {l:'G',w:'Grapes',e:'🍇'},{l:'H',w:'Hat',e:'🎩'},{l:'I',w:'Ice Cream',e:'🍦'},
-  {l:'J',w:'Jellyfish',e:'🪼'},{l:'K',w:'Kite',e:'🪁'},{l:'L',w:'Lion',e:'🦁'},
-  {l:'M',w:'Moon',e:'🌙'},{l:'N',w:'Nest',e:'🪺'},{l:'O',w:'Orange',e:'🍊'},
-  {l:'P',w:'Penguin',e:'🐧'},{l:'Q',w:'Queen',e:'👑'},{l:'R',w:'Rainbow',e:'🌈'},
-  {l:'S',w:'Star',e:'⭐'},{l:'T',w:'Tiger',e:'🐯'},{l:'U',w:'Umbrella',e:'☂️'},
-  {l:'V',w:'Violin',e:'🎻'},{l:'W',w:'Whale',e:'🐳'},{l:'X',w:'Xylophone',e:'🎵'},
-  {l:'Y',w:'Yak',e:'🦬'},{l:'Z',w:'Zebra',e:'🦓'}
-];
+const API = window.location.origin;
 
-const NUMBERS=[
-  {n:1,w:'One'},{n:2,w:'Two'},{n:3,w:'Three'},{n:4,w:'Four'},{n:5,w:'Five'},
-  {n:6,w:'Six'},{n:7,w:'Seven'},{n:8,w:'Eight'},{n:9,w:'Nine'},{n:10,w:'Ten'},
-  {n:11,w:'Eleven'},{n:12,w:'Twelve'},{n:13,w:'Thirteen'},{n:14,w:'Fourteen'},
-  {n:15,w:'Fifteen'},{n:16,w:'Sixteen'},{n:17,w:'Seventeen'},{n:18,w:'Eighteen'},
-  {n:19,w:'Nineteen'},{n:20,w:'Twenty'}
-];
+// ── AUTH HELPERS ──
+function getToken(){ return localStorage.getItem('lumiToken'); }
+function setToken(t){ localStorage.setItem('lumiToken', t); }
+function clearToken(){ localStorage.removeItem('lumiToken'); }
 
-const COLORS=[
-  {name:'Red',hex:'#ff4757'},{name:'Orange',hex:'#ff6b35'},{name:'Yellow',hex:'#ffd32a'},
-  {name:'Green',hex:'#2ed573'},{name:'Blue',hex:'#1e90ff'},{name:'Purple',hex:'#a55eea'},
-  {name:'Pink',hex:'#ff6b9d'},{name:'Brown',hex:'#8B4513'},{name:'Black',hex:'#2f3542'},
-  {name:'Gray',hex:'#747d8c'},{name:'Teal',hex:'#26de81'},{name:'White',hex:'#f1f2f6',text:'#333'}
-];
-
-const ANIMALS=[
-  {name:'Dog',e:'🐶',sound:'Woof woof!',freq:[440,380,440],color:'#ff6b35'},
-  {name:'Cat',e:'🐱',sound:'Meow!',freq:[520,480,520],color:'#a55eea'},
-  {name:'Cow',e:'🐄',sound:'Moooo!',freq:[200,180,200],color:'#1e90ff'},
-  {name:'Duck',e:'🦆',sound:'Quack!',freq:[600,550,600],color:'#ffd32a'},
-  {name:'Lion',e:'🦁',sound:'Roaaaar!',freq:[150,120,150],color:'#ff4757'},
-  {name:'Elephant',e:'🐘',sound:'Paaarp!',freq:[100,80,100],color:'#747d8c'},
-  {name:'Frog',e:'🐸',sound:'Ribbit!',freq:[300,280,340],color:'#2ed573'},
-  {name:'Horse',e:'🐴',sound:'Neigh!',freq:[350,320,380],color:'#8B4513'},
-  {name:'Pig',e:'🐷',sound:'Oink!',freq:[450,420,480],color:'#ff6b9d'},
-  {name:'Sheep',e:'🐑',sound:'Baaaa!',freq:[400,370,410],color:'#26de81'},
-  {name:'Monkey',e:'🐒',sound:'Ooh ooh!',freq:[500,480,520],color:'#ff9500'},
-  {name:'Bear',e:'🐻',sound:'Growl!',freq:[180,150,200],color:'#8B4513'},
-];
-
-const SHAPES=[
-  {name:'Circle',sides:'No corners',color:'#ff4757',svg:'<circle cx="40" cy="40" r="34" fill="#ff4757"/>'},
-  {name:'Square',sides:'4 equal sides',color:'#1e90ff',svg:'<rect x="8" y="8" width="64" height="64" rx="5" fill="#1e90ff"/>'},
-  {name:'Triangle',sides:'3 sides',color:'#ffd32a',svg:'<polygon points="40,8 72,72 8,72" fill="#ffd32a"/>'},
-  {name:'Rectangle',sides:'4 sides',color:'#2ed573',svg:'<rect x="4" y="18" width="72" height="44" rx="5" fill="#2ed573"/>'},
-  {name:'Star',sides:'5 points',color:'#a55eea',svg:'<polygon points="40,4 48,30 76,30 53,46 61,72 40,56 19,72 27,46 4,30 32,30" fill="#a55eea"/>'},
-  {name:'Heart',sides:'Love!',color:'#ff6b9d',svg:'<path d="M40 68 C10 50 4 30 12 18 C20 6 36 10 40 20 C44 10 60 6 68 18 C76 30 70 50 40 68Z" fill="#ff6b9d"/>'},
-  {name:'Diamond',sides:'4 sides',color:'#26de81',svg:'<polygon points="40,4 72,40 40,76 8,40" fill="#26de81"/>'},
-  {name:'Oval',sides:'Like a stretched circle',color:'#ff6b35',svg:'<ellipse cx="40" cy="40" rx="37" ry="22" fill="#ff6b35"/>'},
-  {name:'Pentagon',sides:'5 sides',color:'#ffd32a',svg:'<polygon points="40,4 74,28 62,68 18,68 6,28" fill="#ffd32a"/>'},
-];
-
-const BODY_PARTS=[
-  {name:'Head',e:'🗣️',desc:'Your head is on top!',color:'#ff6b35',fact:'Your brain is inside your head'},
-  {name:'Eyes',e:'👀',desc:'You see with your eyes',color:'#1e90ff',fact:'Eyes help you see colors and shapes'},
-  {name:'Nose',e:'👃',desc:'You smell with your nose',color:'#ff4757',fact:'Your nose can smell over 1 trillion smells!'},
-  {name:'Mouth',e:'👄',desc:'You eat and talk',color:'#ff6b9d',fact:'You have 20 baby teeth'},
-  {name:'Ears',e:'👂',desc:'You hear with your ears',color:'#ffd32a',fact:'Ears help you keep your balance too!'},
-  {name:'Hands',e:'🤲',desc:'You touch and grab',color:'#2ed573',fact:'You have 27 bones in each hand'},
-  {name:'Feet',e:'🦶',desc:'You walk and run',color:'#a55eea',fact:'Each foot has 26 bones'},
-  {name:'Heart',e:'❤️',desc:'Your heart pumps blood',color:'#ff4757',fact:'Your heart beats 100,000 times a day!'},
-  {name:'Tummy',e:'🫃',desc:'Food goes here!',color:'#ff9500',fact:'Your tummy breaks down food for energy'},
-  {name:'Arms',e:'💪',desc:'You lift and hug',color:'#26de81',fact:'Your arms have 3 big muscles'},
-  {name:'Legs',e:'🦵',desc:'You kick and jump',color:'#1e90ff',fact:'Your legs are the strongest part of your body'},
-  {name:'Hair',e:'💇',desc:'Grows on your head',color:'#8B4513',fact:'Hair grows about 6 inches per year'},
-];
-
-const SIGHT_WORDS={
-  'Pre-K':['I','a','is','it','in','on','at','the','and','to','up','go','do','no','so','my','me','he','she','we','be'],
-  'Kindergarten':['am','an','as','can','big','but','by','come','came','did','for','get','got','had','has','have','him','his','hot','how','if','its','let','like','little','look','made','make','may','not','now','of','off','old','one','our','out','ran','run','said','saw','say','see','sit','six','ten','than','that','them','then','they','this','too','two','use','was','way','who','will','with','yes','you','your'],
-  'Grade 1':['about','after','again','also','always','another','any','around','ask','away','back','been','before','best','both','buy','call','clean','could','day','each','eat','every','find','first','five','fly','four','from','full','funny','give','going','good','grow','help','hold','home','hot','hurt','jump','just','keep','kind','know','laugh','long','many','more','most','much','must','never','new','next','night','only','open','over','pick','play','please','pretty','pull','read','right','round','same','show','sing','sleep','small','start','stop','take','tell','thank','their','these','think','those','three','today','together','try','turn','under','upon','very','walk','want','warm','well','went','when','where','which','while','white','why','wish','work','would','write','year','own']
-};
-
-const SPELL_WORDS=[
-  {word:'CAT',e:'🐱'},{word:'DOG',e:'🐶'},{word:'SUN',e:'☀️'},{word:'HAT',e:'🎩'},
-  {word:'BEE',e:'🐝'},{word:'EGG',e:'🥚'},{word:'CUP',e:'☕'},{word:'BUS',e:'🚌'},
-  {word:'RED',e:'🔴'},{word:'BIG',e:'🐘'},{word:'FISH',e:'🐟'},{word:'FROG',e:'🐸'},
-  {word:'STAR',e:'⭐'},{word:'BIRD',e:'🐦'},{word:'CAKE',e:'🎂'},{word:'DUCK',e:'🦆'},
-  {word:'BALL',e:'⚽'},{word:'TREE',e:'🌳'},{word:'MOON',e:'🌙'},{word:'RAIN',e:'🌧️'},
-  {word:'APPLE',e:'🍎'},{word:'HAPPY',e:'😊'},{word:'BUNNY',e:'🐰'},{word:'CANDY',e:'🍬'},
-  {word:'FLOWER',e:'🌸'},{word:'ORANGE',e:'🍊'},{word:'TURTLE',e:'🐢'},
-];
-
-const LCOLORS=['#ff4757','#ff6b35','#ffd32a','#2ed573','#1e90ff','#a55eea','#ff6b9d','#26de81'];
-
-const HOME_SECTIONS=[
-  {id:'alphabet',e:'🔤',label:'Alphabet',sub:'Learn A to Z',bg:'linear-gradient(135deg,#a55eea,#7c4dbb)',sh:'#7c4dbb'},
-  {id:'numbers',e:'🔢',label:'Numbers',sub:'Count 1 to 20',bg:'linear-gradient(135deg,#1e90ff,#0066cc)',sh:'#0066cc'},
-  {id:'colors',e:'🎨',label:'Colors',sub:'Rainbow fun',bg:'linear-gradient(135deg,#ff4757,#cc0022)',sh:'#cc0022'},
-  {id:'animals',e:'🐾',label:'Animals',sub:'Hear their sounds',bg:'linear-gradient(135deg,#2ed573,#1aaa55)',sh:'#1aaa55'},
-  {id:'shapes',e:'🔷',label:'Shapes',sub:'All around us',bg:'linear-gradient(135deg,#ffd32a,#cc9900)',sh:'#cc9900'},
-  {id:'body',e:'🧑',label:'Body Parts',sub:'Head to toe!',bg:'linear-gradient(135deg,#ff6b9d,#cc3366)',sh:'#cc3366'},
-  {id:'sightwords',e:'👁️',label:'Sight Words',sub:'Read & learn',bg:'linear-gradient(135deg,#1e90ff,#764ba2)',sh:'#764ba2'},
-  {id:'spelling',e:'✍️',label:'Spelling',sub:'Spell it out!',bg:'linear-gradient(135deg,#26de81,#1aaa55)',sh:'#1aaa55'},
-  {id:'games',e:'🎮',label:'Games',sub:'Play & learn',bg:'linear-gradient(135deg,#ff6b9d,#cc3366)',sh:'#cc3366'},
-  {id:'puzzle',e:'🧩',label:'Puzzle',sub:'Match & memory',bg:'linear-gradient(135deg,#26de81,#1aaa55)',sh:'#1aaa55'},
-  {id:'draw',e:'✏️',label:'Draw',sub:'Make art!',bg:'linear-gradient(135deg,#ff6b35,#cc3300)',sh:'#cc3300'},
-  {id:'tracker',e:'📊',label:'My Progress',sub:'See what I learned',bg:'linear-gradient(135deg,#667eea,#764ba2)',sh:'#764ba2'},
-];
-
-// ══════════════════════════════════════════════════════
-// TRACKER / STORAGE
-// ══════════════════════════════════════════════════════
-let tracker = JSON.parse(localStorage.getItem('lumiTracker') || JSON.stringify({
-  stars:0, taps:0, sessions:0,
-  subjects:{alphabet:0,numbers:0,colors:0,animals:0,shapes:0,body:0,sightwords:0,spelling:0,games:0,puzzle:0,draw:0},
-  activity:[],
-  badges:[],
-}));
-
-function saveTracker(){ localStorage.setItem('lumiTracker', JSON.stringify(tracker)); }
-
-function logActivity(emoji, text){
-  const now = new Date();
-  const time = now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  tracker.activity.unshift({emoji,text,time});
-  if(tracker.activity.length>50) tracker.activity.pop();
-  tracker.sessions++;
-  saveTracker();
+// Check if already logged in
+async function checkAuth(){
+  const token = getToken();
+  if(!token) return;
+  try {
+    const res = await fetch(`${API}/api/me`, { headers:{ Authorization:`Bearer ${token}` }});
+    if(!res.ok){ clearToken(); return; }
+    const user = await res.json();
+    handleAuthUser(user);
+  } catch { clearToken(); }
 }
 
-function addStar(n=1){
-  tracker.stars+=n; tracker.taps++;
-  document.getElementById('starCount').textContent=tracker.stars;
-  const el=document.querySelector('.star-counter');
-  el.style.transform='scale(1.15)';
-  setTimeout(()=>el.style.transform='',200);
-  checkBadges();
-  saveTracker();
-}
-
-function trackSubject(subject, amount=1){
-  if(tracker.subjects[subject]!==undefined){
-    tracker.subjects[subject]+=amount;
-    saveTracker();
-  }
-}
-
-function resetTracker(){
-  if(confirm('Reset all progress? This cannot be undone.')){
-    tracker={stars:0,taps:0,sessions:0,subjects:{alphabet:0,numbers:0,colors:0,animals:0,shapes:0,body:0,sightwords:0,spelling:0,games:0,puzzle:0,draw:0},activity:[],badges:[]};
-    localStorage.removeItem('lumiTracker');
-    document.getElementById('starCount').textContent=0;
-    renderTracker();
-  }
-}
-
-const BADGES=[
-  {id:'first_star',e:'⭐',label:'First Star!',cond:t=>t.stars>=1},
-  {id:'star10',e:'🌟',label:'10 Stars!',cond:t=>t.stars>=10},
-  {id:'star50',e:'💫',label:'50 Stars!',cond:t=>t.stars>=50},
-  {id:'abc_lover',e:'🔤',label:'ABC Lover',cond:t=>t.subjects.alphabet>=10},
-  {id:'number_wizard',e:'🔢',label:'Number Wizard',cond:t=>t.subjects.numbers>=10},
-  {id:'animal_fan',e:'🐾',label:'Animal Fan',cond:t=>t.subjects.animals>=8},
-  {id:'color_master',e:'🎨',label:'Color Master',cond:t=>t.subjects.colors>=6},
-  {id:'speller',e:'✍️',label:'Super Speller',cond:t=>t.subjects.spelling>=5},
-  {id:'reader',e:'📖',label:'Sight Reader',cond:t=>t.subjects.sightwords>=10},
-  {id:'artist',e:'🖌️',label:'Little Artist',cond:t=>t.subjects.draw>=1},
-  {id:'all_rounder',e:'🏆',label:'All-Rounder!',cond:t=>Object.values(t.subjects).every(v=>v>=1)},
-];
-
-function checkBadges(){
-  BADGES.forEach(b=>{
-    if(!tracker.badges.includes(b.id) && b.cond(tracker)){
-      tracker.badges.push(b.id);
-      saveTracker();
-      showCelebrate(b.e,`Badge Unlocked!`,b.label);
-    }
-  });
-}
-
-function renderTracker(){
-  document.getElementById('t-stars').textContent=tracker.stars;
-  document.getElementById('t-taps').textContent=tracker.taps;
-  document.getElementById('t-sessions').textContent=tracker.sessions;
-
-  // Progress bars
-  const maxes={alphabet:26,numbers:20,colors:12,animals:12,shapes:9,body:12,sightwords:30,spelling:20,games:30,puzzle:20,draw:5};
-  document.getElementById('progressBars').innerHTML=Object.entries(tracker.subjects).map(([sub,val])=>{
-    const max=maxes[sub]||20;
-    const pct=Math.min(100,Math.round((val/max)*100));
-    const labels={alphabet:'Alphabet',numbers:'Numbers',colors:'Colors',animals:'Animals',shapes:'Shapes',body:'Body Parts',sightwords:'Sight Words',spelling:'Spelling',games:'Games',puzzle:'Puzzle',draw:'Drawing'};
-    return `<div class="progress-row">
-      <div class="progress-label">${labels[sub]||sub}</div>
-      <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
-      <div class="progress-pct">${pct}%</div>
-    </div>`;
-  }).join('');
-
-  // Badges
-  document.getElementById('badgeGrid').innerHTML=BADGES.map(b=>{
-    const earned=tracker.badges.includes(b.id);
-    return `<div class="badge-item${earned?'':' locked'}">
-      <span class="badge-emoji">${earned?b.e:'🔒'}</span>${earned?b.label:'???'}
-    </div>`;
-  }).join('');
-
-  // Activity
-  const log=document.getElementById('activityLog');
-  if(!tracker.activity.length){
-    log.innerHTML='<div style="text-align:center;color:#aaa;padding:20px;font-weight:700;">No activity yet — start learning!</div>';
+function handleAuthUser(user){
+  const status = user.subscriptionStatus;
+  if(status === 'active' || status === 'trialing'){
+    // Subscribed — go to app
+    window.location.href = '/app';
+  } else if(status === 'none'){
+    // Signed up but hasn't paid — send to checkout
+    startCheckout();
   } else {
-    log.innerHTML=tracker.activity.slice(0,20).map(a=>`
-      <div class="activity-item">
-        <span class="activity-emoji">${a.emoji}</span>
-        <span class="activity-text">${a.text}</span>
-        <span class="activity-time">${a.time}</span>
-      </div>`).join('');
+    // Canceled / past_due
+    showSubscribePrompt();
   }
 }
 
-// ══════════════════════════════════════════════════════
-// AUDIO
-// ══════════════════════════════════════════════════════
-const audioCtx = window.AudioContext ? new AudioContext() : null;
-document.addEventListener('click',()=>{if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();},{once:true});
+// ── MODALS ──
+function openModal(type){
+  document.getElementById(`${type}Modal`).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(type){
+  document.getElementById(`${type}Modal`).classList.remove('open');
+  document.body.style.overflow='';
+}
+function switchModal(from, to){ closeModal(from); openModal(to); }
 
-function playTone(freqs,dur=0.15){
-  if(!audioCtx)return;
-  freqs.forEach((f,i)=>{
-    const osc=audioCtx.createOscillator(), gain=audioCtx.createGain();
-    osc.connect(gain);gain.connect(audioCtx.destination);
-    osc.frequency.value=f; osc.type='sine';
-    const t=audioCtx.currentTime+i*dur;
-    gain.gain.setValueAtTime(0.3,t);
-    gain.gain.exponentialRampToValueAtTime(0.001,t+dur);
-    osc.start(t);osc.stop(t+dur+0.05);
-  });
-}
-function playSuccess(){playTone([523,659,784,1047],0.1);}
-function playWrong(){playTone([300,250],0.18);}
-function speak(text,rate=0.8,pitch=1.2){
-  if(!window.speechSynthesis)return;
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(text);
-  u.rate=rate;u.pitch=pitch;speechSynthesis.speak(u);
-}
+// Close on overlay click
+document.querySelectorAll('.modal-overlay').forEach(el=>{
+  el.addEventListener('click', e=>{ if(e.target===el) closeModal(el.id.replace('Modal','')); });
+});
 
-// ══════════════════════════════════════════════════════
-// PAGE SWITCHING
-// ══════════════════════════════════════════════════════
-function showPage(name,btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>{b.classList.remove('active');b.style.background='';b.style.color='';b.style.borderColor='';});
-  document.getElementById('page-'+name).classList.add('active');
-  if(btn){
-    btn.classList.add('active');
-    const colors={home:'#ff6b35',alphabet:'#a55eea',numbers:'#1e90ff',colors:'#ff4757',animals:'#2ed573',shapes:'#ff9500',body:'#ff6b9d',sightwords:'#1e90ff',spelling:'#26de81',games:'#ff6b9d',puzzle:'#26de81',draw:'#ff6b35',tracker:'#667eea'};
-    const c=colors[name]||'#ff6b35';
-    btn.style.background=c;btn.style.color='white';btn.style.borderColor=c;
-  }
-  if(name==='tracker')renderTracker();
-  window.scrollTo(0,0);
-}
-function getBtn(name){return[...document.querySelectorAll('.nav-btn')].find(b=>b.getAttribute('onclick')?.includes(`'${name}'`));}
+// Enter key support
+['signupPassword','loginPassword'].forEach(id=>{
+  document.getElementById(id)?.addEventListener('keydown', e=>{ if(e.key==='Enter') id.includes('signup')?doSignup():doLogin(); });
+});
 
-// ══════════════════════════════════════════════════════
-// RENDER: HOME
-// ══════════════════════════════════════════════════════
-function renderHome(){
-  document.getElementById('homeCards').innerHTML=HOME_SECTIONS.map(s=>`
-    <div class="card" style="background:${s.bg};box-shadow:0 6px 0 ${s.sh}" onclick="showPage('${s.id}',getBtn('${s.id}'))">
-      <span class="card-emoji">${s.e}</span>
-      <div class="card-label">${s.label}</div>
-      <div class="card-sub">${s.sub}</div>
-    </div>`).join('');
-}
+// ── SIGNUP ──
+async function doSignup(){
+  const name = document.getElementById('signupName').value.trim();
+  const email = document.getElementById('signupEmail').value.trim();
+  const password = document.getElementById('signupPassword').value;
+  const btn = document.getElementById('signupBtn');
+  const errEl = document.getElementById('signupError');
 
-// ══════════════════════════════════════════════════════
-// RENDER: ALPHABET
-// ══════════════════════════════════════════════════════
-function renderAlphabet(){
-  document.getElementById('alphabetGrid').innerHTML=LETTERS.map((item,i)=>{
-    const c=LCOLORS[i%LCOLORS.length];
-    return `<div class="alpha-card" style="border-color:${c}" onclick="letterTap(this,'${item.l}','${item.w}',${i})">
-      <div class="alpha-letter" style="color:${c}">${item.l}</div>
-      <div class="alpha-pic">${item.e}</div>
-      <div class="alpha-word">${item.w}</div>
-    </div>`;
-  }).join('');
-}
-function letterTap(el,letter,word,idx){
-  playTone([261+idx*15,311+idx*15,392+idx*15],0.12);
-  speak(`${letter} is for ${word}`);
-  addStar(1);trackSubject('alphabet');
-  ripple(el);bounce(el);
-  logActivity('🔤',`Learned letter ${letter} for ${word}`);
-}
+  errEl.style.display='none';
+  if(!name||!email||!password){ showErr('signupError','Please fill in all fields.'); return; }
 
-// ══════════════════════════════════════════════════════
-// RENDER: NUMBERS
-// ══════════════════════════════════════════════════════
-function renderNumbers(){
-  document.getElementById('numbersGrid').innerHTML=NUMBERS.map((item,i)=>{
-    const c=LCOLORS[i%LCOLORS.length];
-    const dots=item.n<=10?'●'.repeat(item.n).split('').join(' '):`${item.n} dots`;
-    return `<div class="num-card" style="border-color:${c}" onclick="numTap(this,${item.n},'${item.w}')">
-      <div class="num-big" style="color:${c}">${item.n}</div>
-      <div class="num-dots" style="color:${c};font-size:${item.n>10?'11px':'14px'}">${dots}</div>
-      <div class="num-word">${item.w}</div>
-    </div>`;
-  }).join('');
-}
-function numTap(el,n,word){
-  playTone([261+n*20],0.15);
-  speak(word);
-  addStar(1);trackSubject('numbers');
-  ripple(el);bounce(el);
-  logActivity('🔢',`Counted number ${n} — ${word}`);
-}
+  btn.disabled=true; btn.textContent='Creating account...';
 
-// ══════════════════════════════════════════════════════
-// RENDER: COLORS
-// ══════════════════════════════════════════════════════
-function renderColors(){
-  document.getElementById('colorsGrid').innerHTML=COLORS.map(c=>`
-    <div class="color-card" style="background:${c.hex}" onclick="colorTap(this,'${c.name}')">
-      <div class="color-circle"></div>
-      <div class="color-name" style="color:${c.text||'white'}">${c.name}</div>
-    </div>`).join('');
-}
-function colorTap(el,name){
-  playTone([392,494,587],0.15);
-  speak(`${name}!`);
-  addStar(1);trackSubject('colors');
-  bounce(el);
-  logActivity('🎨',`Learned the color ${name}`);
-}
+  try {
+    const res = await fetch(`${API}/api/signup`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({name, email, password})
+    });
+    const data = await res.json();
+    if(!res.ok){ showErr('signupError', data.error||'Something went wrong'); btn.disabled=false; btn.textContent='Create Account & Start Trial →'; return; }
 
-// ══════════════════════════════════════════════════════
-// RENDER: ANIMALS
-// ══════════════════════════════════════════════════════
-function renderAnimals(){
-  document.getElementById('animalsGrid').innerHTML=ANIMALS.map(a=>`
-    <div class="animal-card" style="border-color:${a.color}" onclick="animalTap(this,'${a.name}','${a.sound}',${JSON.stringify(a.freq)})">
-      <div class="animal-emoji">${a.e}</div>
-      <div class="animal-name" style="color:${a.color}">${a.name}</div>
-      <div class="animal-sound">${a.sound}</div>
-    </div>`).join('');
-}
-function animalTap(el,name,sound,freq){
-  playTone(freq,0.18);
-  speak(`${name} says ${sound}`);
-  addStar(1);trackSubject('animals');
-  ripple(el);
-  el.style.transform='scale(1.1) rotate(5deg)';
-  setTimeout(()=>el.style.transform='',400);
-  logActivity('🐾',`Heard ${name} say "${sound}"`);
-}
-
-// ══════════════════════════════════════════════════════
-// RENDER: SHAPES
-// ══════════════════════════════════════════════════════
-function renderShapes(){
-  document.getElementById('shapesGrid').innerHTML=SHAPES.map(s=>`
-    <div class="shape-card" onclick="shapeTap(this,'${s.name}','${s.sides}')">
-      <svg width="80" height="80" viewBox="0 0 80 80">${s.svg}</svg>
-      <div class="shape-name" style="color:${s.color}">${s.name}</div>
-      <div class="shape-sides">${s.sides}</div>
-    </div>`).join('');
-}
-function shapeTap(el,name,sides){
-  playTone([392,523,659],0.12);
-  speak(`${name}! ${sides}`);
-  addStar(1);trackSubject('shapes');
-  bounce(el);
-  logActivity('🔷',`Learned the ${name} shape`);
-}
-
-// ══════════════════════════════════════════════════════
-// RENDER: BODY PARTS
-// ══════════════════════════════════════════════════════
-function renderBody(){
-  document.getElementById('bodyGrid').innerHTML=BODY_PARTS.map(b=>`
-    <div class="body-part-card" style="border-color:${b.color}" onclick="bodyTap(this,'${b.name}','${b.desc}','${b.fact}')">
-      <span style="font-size:36px">${b.e}</span>
-      <div>
-        <div class="body-part-name" style="color:${b.color};font-family:'Fredoka One',cursive;font-size:18px">${b.name}</div>
-        <div style="font-size:11px;color:#888;font-weight:700;margin-top:2px">${b.desc}</div>
-        <div style="font-size:10px;color:#bbb;font-weight:700;margin-top:2px;font-style:italic">${b.fact}</div>
-      </div>
-    </div>`).join('');
-}
-function bodyTap(el,name,desc,fact){
-  playTone([440,550,660],0.12);
-  speak(`${name}! ${desc}`);
-  addStar(1);trackSubject('body');
-  bounce(el);
-  logActivity('🧑',`Learned about the ${name}`);
-}
-
-// ══════════════════════════════════════════════════════
-// RENDER: SIGHT WORDS
-// ══════════════════════════════════════════════════════
-let currentSightLevel='Pre-K';
-function renderSightWords(){
-  const tabs=document.getElementById('sightTabs');
-  tabs.innerHTML=Object.keys(SIGHT_WORDS).map(level=>`
-    <div class="level-tab${level===currentSightLevel?' active':''}" onclick="setSightLevel('${level}')">${level}</div>`).join('');
-  const words=SIGHT_WORDS[currentSightLevel];
-  document.getElementById('sightGrid').innerHTML=words.map((w,i)=>{
-    const c=LCOLORS[i%LCOLORS.length];
-    return `<div class="sight-word-card" style="border-color:${c}" onclick="sightTap(this,'${w}','${currentSightLevel}')">
-      <div class="sight-word" style="color:${c}">${w}</div>
-      <div class="sight-level" style="color:${c}">${currentSightLevel}</div>
-    </div>`;
-  }).join('');
-}
-function setSightLevel(level){
-  currentSightLevel=level;
-  renderSightWords();
-}
-function sightTap(el,word,level){
-  playTone([523,659],0.15);
-  speak(word,0.7,1.1);
-  addStar(1);trackSubject('sightwords');
-  bounce(el);
-  logActivity('👁️',`Read sight word "${word}" (${level})`);
-}
-
-// ══════════════════════════════════════════════════════
-// SPELLING GAME
-// ══════════════════════════════════════════════════════
-let spWord='', spEntered=[], spScore=0, spStreak=0;
-
-function nextSpelling(){
-  const item=SPELL_WORDS[Math.floor(Math.random()*SPELL_WORDS.length)];
-  spWord=item.word; spEntered=[];
-  document.getElementById('spEmoji').textContent=item.e;
-  document.getElementById('spHint').textContent=`Spell: ${item.word.split('').join(' _ ')}`;
-  renderSpBlanks();
-  // Shuffle letters
-  const extra=[];
-  while(extra.length<Math.min(4,26-spWord.length)){
-    const l=String.fromCharCode(65+Math.floor(Math.random()*26));
-    if(!spWord.includes(l)&&!extra.includes(l)) extra.push(l);
-  }
-  const letters=[...new Set(spWord.split(''))];
-  const all=shuffle([...spWord.split(''),...extra]);
-  document.getElementById('spLetters').innerHTML=all.map((l,i)=>`
-    <button class="spell-letter-btn" id="sl${i}" onclick="tapSpLetter('${l}',this)">${l}</button>`).join('');
-  speak(`Spell ${item.word}`,0.7,1.1);
-}
-
-function renderSpBlanks(){
-  document.getElementById('spBlanks').innerHTML=spWord.split('').map((_,i)=>`
-    <div class="spell-blank${i<spEntered.length?' filled':''}" id="sb${i}">
-      ${i<spEntered.length?spEntered[i]:''}
-    </div>`).join('');
-}
-
-function tapSpLetter(letter,btn){
-  if(spEntered.length>=spWord.length)return;
-  spEntered.push(letter);
-  btn.classList.add('used');
-  renderSpBlanks();
-  playTone([440+spEntered.length*40],0.1);
-  if(spEntered.length===spWord.length) checkSpelling();
-}
-
-function checkSpelling(){
-  const correct=spEntered.join('')===spWord;
-  spWord.split('').forEach((_,i)=>{
-    const el=document.getElementById('sb'+i);
-    if(el)el.classList.add(correct?'correct':'wrong');
-  });
-  if(correct){
-    playSuccess();
-    spScore+=10;spStreak++;
-    document.getElementById('spScore').textContent=spScore;
-    document.getElementById('spStreak').textContent=spStreak;
-    addStar(3);trackSubject('spelling');
-    logActivity('✍️',`Spelled "${spWord}" correctly! 🎉`);
-    if(spStreak%3===0) showCelebrate('🏆','Amazing Speller!',`${spStreak} words in a row!`);
-    setTimeout(nextSpelling,1500);
-  } else {
-    playWrong(); spStreak=0;
-    document.getElementById('spStreak').textContent=0;
-    setTimeout(()=>{
-      spEntered=[];
-      document.querySelectorAll('.spell-letter-btn').forEach(b=>b.classList.remove('used'));
-      renderSpBlanks();
-    },1200);
-  }
-}
-function clearSpelling(){
-  spEntered=[];
-  document.querySelectorAll('.spell-letter-btn').forEach(b=>b.classList.remove('used'));
-  renderSpBlanks();
-}
-
-// ══════════════════════════════════════════════════════
-// GAMES
-// ══════════════════════════════════════════════════════
-let lgScore=0,lgStreak=0,cgScore=0,colorScore=0;
-
-function nextLetterGame(){
-  document.getElementById('lgNext').style.display='none';
-  document.querySelectorAll('#lgChoices .game-choice').forEach(c=>{c.className='game-choice';c.onclick=null;});
-  const correct=LETTERS[Math.floor(Math.random()*LETTERS.length)];
-  document.getElementById('lgQuestion').innerHTML=`<span style="font-size:60px">${correct.l}</span><br><small style="font-size:16px;color:#888">Which starts with ${correct.l}?</small>`;
-  const wrong=shuffle(LETTERS.filter(x=>x.l!==correct.l)).slice(0,3);
-  const choices=shuffle([correct,...wrong]);
-  document.getElementById('lgChoices').innerHTML=choices.map(c=>
-    `<div class="game-choice" onclick="checkLetter(this,'${c.l}','${correct.l}')">${c.e}<br><small style="font-size:13px">${c.w}</small></div>`
-  ).join('');
-}
-function checkLetter(el,chosen,correct){
-  document.querySelectorAll('#lgChoices .game-choice').forEach(c=>c.onclick=null);
-  if(chosen===correct){
-    el.classList.add('correct');playSuccess();addStar(2);
-    lgScore+=10;lgStreak++;
-    document.getElementById('lgScore').textContent=lgScore;
-    document.getElementById('lgStreak').textContent=lgStreak;
-    trackSubject('games');logActivity('🎮',`Got letter ${correct} right in Letter Match!`);
-    if(lgStreak%3===0)showCelebrate('🌟','Awesome Streak!',`${lgStreak} correct in a row!`);
-  } else {
-    el.classList.add('wrong');playWrong();lgStreak=0;
-    document.getElementById('lgStreak').textContent=0;
-  }
-  document.getElementById('lgNext').style.display='block';
-}
-
-function nextCountGame(){
-  document.getElementById('cgNext').style.display='none';
-  const count=Math.floor(Math.random()*9)+1;
-  const ems=['🍎','⭐','🐶','🌸','🎈','🍕','🐱','🌙','🦋'];
-  const e=ems[Math.floor(Math.random()*ems.length)];
-  document.getElementById('cgQuestion').innerHTML=`<div style="font-size:32px;letter-spacing:3px;line-height:1.5">${e.repeat(count)}</div>`;
-  const nums=shuffle([...new Set([count,count+1,count-1,count+2].filter(n=>n>0&&n<=10))]).slice(0,4);
-  if(!nums.includes(count)){nums[0]=count;}
-  document.getElementById('cgChoices').innerHTML=shuffle(nums).map(n=>
-    `<div class="game-choice" style="font-size:26px" onclick="checkCount(this,${n},${count})">${n}</div>`
-  ).join('');
-}
-function checkCount(el,chosen,correct){
-  document.querySelectorAll('#cgChoices .game-choice').forEach(c=>c.onclick=null);
-  if(chosen===correct){
-    el.classList.add('correct');playSuccess();addStar(2);
-    cgScore+=10;document.getElementById('cgScore').textContent=cgScore;
-    trackSubject('games');logActivity('🎮',`Counted ${correct} correctly in Count It!`);
-  } else {el.classList.add('wrong');playWrong();}
-  document.getElementById('cgNext').style.display='block';
-}
-
-const colorGameData=COLORS.filter(c=>c.name!=='White');
-function nextColorGame(){
-  document.getElementById('colorNext').style.display='none';
-  const correct=colorGameData[Math.floor(Math.random()*colorGameData.length)];
-  document.getElementById('colorQuestion').innerHTML=`<div style="font-size:20px;font-weight:800;color:#333">Tap the color: <span style="color:${correct.hex};font-family:'Fredoka One'">${correct.name}</span></div>`;
-  const wrong=shuffle(colorGameData.filter(c=>c.name!==correct.name)).slice(0,3);
-  document.getElementById('colorChoices').innerHTML=shuffle([correct,...wrong]).map(c=>
-    `<div class="game-choice" style="background:${c.hex};color:white;text-shadow:1px 1px 2px rgba(0,0,0,0.4);font-family:'Fredoka One'" onclick="checkColor(this,'${c.name}','${correct.name}')">${c.name}</div>`
-  ).join('');
-}
-function checkColor(el,chosen,correct){
-  document.querySelectorAll('#colorChoices .game-choice').forEach(c=>c.onclick=null);
-  if(chosen===correct){
-    el.style.outline='5px solid #2ed573';playSuccess();addStar(2);
-    colorScore+=10;document.getElementById('colorScore').textContent=colorScore;
-    trackSubject('games');logActivity('🎮',`Identified ${correct} color correctly!`);
-  } else {el.style.outline='5px solid #ff4757';playWrong();}
-  document.getElementById('colorNext').style.display='block';
-}
-
-// ══════════════════════════════════════════════════════
-// PUZZLE
-// ══════════════════════════════════════════════════════
-const PUZZLE_EMOJIS=['🐶','🐱','🐸','🦋','🌈','⭐','🍎','🎈','🚀','🌸','🦄','🐧'];
-let pFlipped=[],pMatched=[],pMoves=0;
-
-function initPuzzle(){
-  const pairs=shuffle(PUZZLE_EMOJIS).slice(0,8);
-  const tiles=shuffle([...pairs,...pairs]);
-  pFlipped=[];pMatched=[];pMoves=0;
-  document.getElementById('moveCount').textContent=0;
-  document.getElementById('pairsFound').textContent=0;
-  document.getElementById('pairsTotal').textContent=8;
-  document.getElementById('puzzleGrid').innerHTML=tiles.map((e,i)=>
-    `<div class="puzzle-tile" data-emoji="${e}" data-idx="${i}" onclick="flipTile(this)">?</div>`
-  ).join('');
-}
-function flipTile(el){
-  if(el.classList.contains('flipped')||el.classList.contains('matched')||pFlipped.length>=2)return;
-  el.classList.add('flipped');el.textContent=el.dataset.emoji;
-  pFlipped.push(el);playTone([523,659],0.1);
-  if(pFlipped.length===2){
-    pMoves++;document.getElementById('moveCount').textContent=pMoves;
-    const[a,b]=pFlipped;
-    if(a.dataset.emoji===b.dataset.emoji){
-      setTimeout(()=>{
-        a.classList.remove('flipped');a.classList.add('matched');
-        b.classList.remove('flipped');b.classList.add('matched');
-        playSuccess();addStar(3);pMatched.push(a,b);pFlipped=[];
-        const found=pMatched.length/2;
-        document.getElementById('pairsFound').textContent=found;
-        trackSubject('puzzle');logActivity('🧩',`Found a matching pair! (${found}/8)`);
-        if(found===8){setTimeout(()=>showCelebrate('🧩','You Won!',`All pairs in ${pMoves} moves!`),400);}
-      },400);
-    } else {
-      setTimeout(()=>{
-        a.classList.remove('flipped');a.textContent='?';
-        b.classList.remove('flipped');b.textContent='?';
-        playWrong();pFlipped=[];
-      },800);
-    }
+    setToken(data.token);
+    btn.textContent='Redirecting to checkout...';
+    await startCheckout();
+  } catch(err){
+    showErr('signupError','Could not connect. Please try again.');
+    btn.disabled=false; btn.textContent='Create Account & Start Trial →';
   }
 }
 
-// ══════════════════════════════════════════════════════
-// DRAWING
-// ══════════════════════════════════════════════════════
-let drawing=false,drawColor='#ff4757',drawSize=10,drawTool='pen';
-const drawColors=['#ff4757','#ff6b35','#ffd32a','#2ed573','#1e90ff','#a55eea','#ff6b9d','#2f3542','#ffffff'];
+// ── LOGIN ──
+async function doLogin(){
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const btn = document.getElementById('loginBtn');
 
-function initDraw(){
-  document.getElementById('colorPicker').innerHTML=drawColors.map(c=>
-    `<div class="color-dot${c===drawColor?' selected':''}" style="background:${c}" onclick="setDrawColor('${c}',this)"></div>`
-  ).join('');
-  const canvas=document.getElementById('drawCanvas');
-  const ctx=canvas.getContext('2d');
-  ctx.fillStyle='#fffef0';ctx.fillRect(0,0,canvas.width,canvas.height);
-  canvas.addEventListener('mousedown',e=>{drawing=true;draw(e);trackSubject('draw');logActivity('✏️','Started drawing in Art Studio');});
-  canvas.addEventListener('mousemove',e=>{if(drawing)draw(e);});
-  canvas.addEventListener('mouseup',()=>drawing=false);
-  canvas.addEventListener('mouseleave',()=>drawing=false);
-  canvas.addEventListener('touchstart',e=>{e.preventDefault();drawing=true;drawTouch(e);},{passive:false});
-  canvas.addEventListener('touchmove',e=>{e.preventDefault();if(drawing)drawTouch(e);},{passive:false});
-  canvas.addEventListener('touchend',()=>drawing=false);
-  resizeCanvas();
-}
-function getPos(canvas,e){
-  const r=canvas.getBoundingClientRect();
-  return{x:(e.clientX-r.left)*(canvas.width/r.width),y:(e.clientY-r.top)*(canvas.height/r.height)};
-}
-function draw(e){
-  const canvas=document.getElementById('drawCanvas');
-  const ctx=canvas.getContext('2d');
-  const p=getPos(canvas,e);
-  ctx.beginPath();ctx.arc(p.x,p.y,drawSize/2,0,Math.PI*2);
-  ctx.fillStyle=drawTool==='eraser'?'#fffef0':drawColor;ctx.fill();
-}
-function drawTouch(e){draw({clientX:e.touches[0].clientX,clientY:e.touches[0].clientY});}
-function setDrawColor(c,el){drawColor=c;drawTool='pen';document.querySelectorAll('.color-dot').forEach(d=>d.classList.remove('selected'));el.classList.add('selected');}
-function setTool(t){drawTool=t;}
-function setSize(s){drawSize=s;}
-function clearCanvas(){const canvas=document.getElementById('drawCanvas');const ctx=canvas.getContext('2d');ctx.fillStyle='#fffef0';ctx.fillRect(0,0,canvas.width,canvas.height);}
-function resizeCanvas(){
-  const canvas=document.getElementById('drawCanvas');
-  const maxW=Math.min(500,window.innerWidth-60);
-  canvas.style.width=maxW+'px';canvas.style.height=(maxW*0.64)+'px';
-}
-window.addEventListener('resize',resizeCanvas);
+  document.getElementById('loginError').style.display='none';
+  if(!email||!password){ showErr('loginError','Please enter your email and password.'); return; }
 
-// ══════════════════════════════════════════════════════
-// CELEBRATE
-// ══════════════════════════════════════════════════════
-function showCelebrate(emoji,title,sub){
-  document.getElementById('celebEmoji').textContent=emoji;
-  document.getElementById('celebTitle').textContent=title;
-  document.getElementById('celebSub').textContent=sub;
-  document.getElementById('celebrateModal').classList.add('show');
-  addStar(5);launchConfetti();
-}
-function closeCelebrate(){document.getElementById('celebrateModal').classList.remove('show');}
-function launchConfetti(){
-  const colors=['#ff4757','#ffd32a','#2ed573','#1e90ff','#a55eea','#ff6b35'];
-  for(let i=0;i<50;i++){
-    const p=document.createElement('div');
-    p.className='confetti-piece';
-    p.style.cssText=`left:${Math.random()*100}vw;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*0.5}s;animation-duration:${1.5+Math.random()}s;width:${6+Math.random()*10}px;height:${6+Math.random()*10}px;border-radius:${Math.random()>.5?'50%':'2px'};`;
-    document.body.appendChild(p);setTimeout(()=>p.remove(),2500);
+  btn.disabled=true; btn.textContent='Logging in...';
+
+  try {
+    const res = await fetch(`${API}/api/login`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({email, password})
+    });
+    const data = await res.json();
+    if(!res.ok){ showErr('loginError', data.error||'Login failed'); btn.disabled=false; btn.textContent='Log In →'; return; }
+
+    setToken(data.token);
+    handleAuthUser(data.user);
+  } catch {
+    showErr('loginError','Could not connect. Please try again.');
+    btn.disabled=false; btn.textContent='Log In →';
   }
 }
 
-// ══════════════════════════════════════════════════════
-// HELPERS
-// ══════════════════════════════════════════════════════
-function shuffle(a){return[...a].sort(()=>Math.random()-0.5);}
-function bounce(el){el.style.transform='scale(1.1)';setTimeout(()=>el.style.transform='',280);}
-function ripple(el){
-  const r=document.createElement('div');r.className='ripple';
-  r.style.cssText='left:50%;top:50%;margin-left:-10px;margin-top:-10px;';
-  el.appendChild(r);setTimeout(()=>r.remove(),500);
+// ── STRIPE CHECKOUT ──
+async function startCheckout(){
+  const token = getToken();
+  if(!token) return openModal('signup');
+
+  try {
+    const res = await fetch(`${API}/api/create-checkout`, {
+      method:'POST',
+      headers:{'Authorization':`Bearer ${token}`}
+    });
+    const data = await res.json();
+    if(data.url) window.location.href = data.url;
+    else if(data.error === 'You already have an active subscription!') window.location.href='/app';
+    else alert('Could not start checkout: ' + (data.error||'Unknown error'));
+  } catch {
+    alert('Could not start checkout. Please try again.');
+  }
 }
 
-// ══════════════════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════════════════
-renderHome();
-renderAlphabet();
-renderNumbers();
-renderColors();
-renderAnimals();
-renderShapes();
-renderBody();
-renderSightWords();
-nextSpelling();
-nextLetterGame();
-nextCountGame();
-nextColorGame();
-initPuzzle();
-initDraw();
+function showSubscribePrompt(){
+  alert('Your subscription has ended. Please restart your plan to continue.');
+  startCheckout();
+}
 
-// Restore stars from tracker
-document.getElementById('starCount').textContent=tracker.stars;
+// ── FAQ ──
+function toggleFaq(el){
+  const item = el.parentElement;
+  item.classList.toggle('open');
+}
 
-// Set home button active
-const homeBtn=document.querySelector('.nav-btn');
-homeBtn.style.background='#ff6b35';homeBtn.style.color='white';homeBtn.style.borderColor='#ff6b35';
+// ── ERROR HELPER ──
+function showErr(id, msg){
+  const el = document.getElementById(id);
+  el.textContent = '⚠ ' + msg;
+  el.style.display='block';
+}
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// Check auth on load
+checkAuth();
+
+// Show canceled message if redirected back
+if(new URLSearchParams(location.search).get('canceled')){
+  setTimeout(()=>alert('No worries! Your free trial is still waiting whenever you\'re ready. 🌟'), 500);
+}
 </script>
 </body>
 </html>
-

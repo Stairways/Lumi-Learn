@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Lumi Learn! 🌟</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:linear-gradient(135deg,#fff9f0,#ffe8d5);font-family:'Nunito',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;}
+.box{background:white;border-radius:32px;padding:52px 40px;max-width:460px;width:100%;border:5px solid #ffd32a;box-shadow:0 20px 60px rgba(255,107,53,0.15);}
+.big-emoji{font-size:88px;display:block;margin-bottom:16px;animation:bounce 0.8s ease infinite alternate;}
+@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(-14px)}}
+h1{font-family:'Fredoka One',cursive;font-size:38px;color:#ff6b35;margin-bottom:10px;}
+p{font-size:16px;font-weight:700;color:#888;line-height:1.7;margin-bottom:28px;}
+.go-btn{display:inline-block;background:linear-gradient(135deg,#ff6b35,#ff4757);color:white;text-decoration:none;border-radius:16px;padding:18px 40px;font-family:'Fredoka One',cursive;font-size:22px;box-shadow:0 6px 0 #cc3300;transition:all 0.15s;}
+.go-btn:hover{transform:translateY(-3px);box-shadow:0 9px 0 #cc3300;}
+.trial-note{margin-top:18px;font-size:13px;color:#aaa;font-weight:700;}
+.confetti-piece{position:fixed;animation:fall 2.5s ease-in forwards;pointer-events:none;}
+@keyframes fall{0%{transform:translateY(-20px) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+</style>
+</head>
+<body>
+<div class="box">
+  <span class="big-emoji">🎉</span>
+  <h1>Welcome to Lumi Learn!</h1>
+  <p>Your 7-day free trial has started!<br>No charge until your trial ends.<br><br>Let's start learning — your child is going to love this! 🌟</p>
+  <a class="go-btn" href="/app">Open Lumi Learn →</a>
+  <div class="trial-note">Questions? Email us at hello@lumilearn.com</div>
+</div>
+<script>
+// Launch confetti
+const colors=['#ff4757','#ffd32a','#2ed573','#1e90ff','#a55eea','#ff6b35'];
+for(let i=0;i<60;i++){
+  const p=document.createElement('div');
+  p.className='confetti-piece';
+  p.style.cssText=`left:${Math.random()*100}vw;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*0.8}s;animation-duration:${2+Math.random()}s;width:${8+Math.random()*10}px;height:${8+Math.random()*10}px;border-radius:${Math.random()>.5?'50%':'3px'};`;
+  document.body.appendChild(p);setTimeout(()=>p.remove(),3000);
+}
+</script>
+</body>
+</html>
